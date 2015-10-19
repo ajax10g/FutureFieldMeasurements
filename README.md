@@ -13,17 +13,16 @@ on the 3.19.0-25-kernel. The edit is on line 329 where the ```smp_mb__before_cle
 2. CD into the ```U20_usb_driver_for_ubuntu14.04``` directory and run
 ```make && make install```
 
-3. Copy the wvdial.conf from this repo to ```/etc/wvdial.conf```. This file
-has been prefilled with an APN from Telenor. Change this accordingly.
+3. Install ```wvdial``` by running ```#apt-get install wvdial```.
 
-4. Install ```wvdial``` by running ```#apt-get install wvdial``` Run ```wvdial``` from the command line to enable the communication with
-the modem.
+4. Copy the wvdial.conf from ```modem/wvdial.conf``` this repo to ```/etc/wvdial.conf```. This file
+has been prefilled with an APN from Telenor. Change this accordingly. Run ```wvdial``` from the command line to test the communication with the modem.
 
-5. Create an upstart service for wvdial to make it start when the computer
-starts and also make it respawn if it is killed for some reason. This
-upstart script is available under ```upstart/modem.conf```. This script
-should be placed here on the ICO-300 ```/etc/init/modem.conf``` (TODO)
-
+5. Edit ```/etc/network/interfaces```and add
+```
+auto ppp0
+iface ppp0 inet wvdial
+```
 6. Make a cron job that pings for example Googles DNS (8.8.8.8) regularly,
 and if that does not work, restart the wvdial service. (TODO)
 
