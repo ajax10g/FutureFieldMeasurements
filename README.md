@@ -23,5 +23,6 @@ has been prefilled with an APN from Telenor. Change this accordingly. Run ```wvd
 auto ppp0
 iface ppp0 inet wvdial
 ```
-- Make a cron job that pings for example Googles DNS (8.8.8.8) regularly,
-and if that does not work, restart the modem. (TODO)
+- Create a cron job that pings for example Googles DNS (8.8.8.8) regularly,
+and if that does not work, restart the modem. This crontab, code and scripts can
+be found in the "modem" directory.
