@@ -8,7 +8,7 @@ Building the 3G-modem driver:
 
 - Copy the ```U20_usb_driver_for_ubuntu14.04``` folder to your home
 directory on the ICO-300. The usb_wwan.c has been edited to compile
-on the 3.19.0-25-kernel. The edit is on line 329 where the ```smp_mb__before_clear_bit()``` has been replaced with ```smp_mb__before_atomic();```.
+on the 3.19.0-25-kernel. The edit is on line 329 where the ```smp_mb__before_clear_bit();``` has been replaced with ```smp_mb__before_atomic();```.
 
 - CD into the ```U20_usb_driver_for_ubuntu14.04``` directory and run
 ```make && make install```
