@@ -18,7 +18,7 @@ on the 3.19.0-25-kernel. The edit is on line 329 where the ```smp_mb__before_cle
 - Copy the wvdial.conf from ```modem/wvdial.conf``` this repo to ```/etc/wvdial.conf```. This file
 has been prefilled with an APN from Telenor. Change this accordingly. Run ```wvdial``` from the command line to test the communication with the modem.
 
-- Edit ```/etc/network/interfaces```and add 
+- Edit ```/etc/network/interfaces``` and add 
 ```
 auto ppp0
 iface ppp0 inet wvdial
