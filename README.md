@@ -68,4 +68,4 @@ protocol websockets
 - IF a TLS listener is needed, see this blog post: http://jpmens.net/2014/07/03/the-mosquitto-mqtt-broker-gets-websockets-support/
 
 - Create 'mosquitto' user: ```useradd mosquitto```
-- Create an upstart job for mosquitto server using the ```/etc/mosquitto/mosquitto.conf``` file. The mosquitto.conf is found in the upstart folder in this repo.
+- Create an upstart job for mosquitto server using the ```/etc/mosquitto/mosquitto.conf``` file. The mosquitto.conf file used for configuration of the mosquitto server is found under /mosquitto in this repo and the mosquitto.conf file used for defining the upstart job (another mosquitto.conf) is found in the upstart folder in this repo.
