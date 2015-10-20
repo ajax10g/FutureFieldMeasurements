@@ -66,3 +66,6 @@ listener 9001 127.0.0.1
 protocol websockets
 ```
 - IF a TLS listener is needed, see this blog post: http://jpmens.net/2014/07/03/the-mosquitto-mqtt-broker-gets-websockets-support/
+
+- Create 'mosquitto' user: ```useradd mosquitto```
+- Create an upstart job for mosquitto server using the ```/etc/mosquitto/mosquitto.conf``` file. The mosquitto.conf is found in the upstart folder in this repo.
