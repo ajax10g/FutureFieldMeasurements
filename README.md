@@ -41,3 +41,28 @@ server ntp1.sp.se dynamic
 server ntp2.sp.se dynamic
 ```
 - Check the syncronization with the servers by running ```ntpq -p``` from the command line.
+
+Setting up local mosquitto server as IPC with websockets enabled:
+
+- Install cmake, ccmake, libssl and build-essential: ```#apt-get install cmake cmake-curses-gui libssl-dev build-essential```
+- Install libtool and automake: ```#apt-get install libtool automake```
+- Clone ```git clone git://github.com/bagder/c-ares.git```
+- Cd into c-ares
+- Run ```./buildconf```
+- Run ```./configure```
+- Run ```make && make install```
+- Install libwebsockets: ``#apt-get install libwebsockets```
+- Clone this repo: ```git clone https://git.eclipse.org/r/mosquitto/org.eclipse.mosquitto```
+- CD into org.eclipse.mosquttio
+- Run ```ccmake .```
+- Enable the websockets flag in the GUI ```WITH_WEBSOCKETS```
+- Press c to configure
+- Press g to generate configuration and exit the GUI
+- While still in the  org.eclipse.mosquttio folder, runt ```make``` and ```make install```
+- Edit ```/etc/mosquitto/mosquitto.conf``` and add the following to the end of the file:
+```
+## Websocket listeners
+listener 9001 127.0.0.1
+protocol websockets
+```
+- IF a TLS listener is needed, see this blog post: http://jpmens.net/2014/07/03/the-mosquitto-mqtt-broker-gets-websockets-support/
