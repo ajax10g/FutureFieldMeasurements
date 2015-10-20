@@ -25,6 +25,16 @@ Add the ppp0 network interface:
 auto ppp0
 iface ppp0 inet wvdial
 ```
+Make the ppp0 the default route, to make all traffic go via ppp0:
+
+- Edit ```/etc/ppp/peers/wvdial```` to look like this
+```
+noauth
+name wvdial
+usepeerdns
+defaultroute
+replacedefaultroute
+```
 
 Monitor and auto-reset modem if it hangs:
 
