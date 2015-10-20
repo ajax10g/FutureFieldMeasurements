@@ -28,27 +28,23 @@ cp $dir/resetmodem.sh /etc/futurefieldmeasurements/$dir
 echo "Copying buses scripts to /etc/futurefieldmeasurements."
 dir="1-wire"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
-service $dir restart
 
 dir="ethercat"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
-service $dir restart
 
 dir="mbus"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
-service $dir restart
 
 dir="modbus-rtu"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
-service $dir restart
 
 dir="modbus-tcp"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
-service $dir restart
 
+echo "Now restarting mosquitto and thus restarting all bus jobs."
 dir="mosquitto"
 cp  $dir/mosquitto.conf /etc/$dir/mosquitto.conf
-service $dir restart
+service mosquitto restart
 
 echo "Loading crontab from file."
 crontab crontab
