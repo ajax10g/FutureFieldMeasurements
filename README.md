@@ -89,4 +89,3 @@ Using the Axiomtek BSP API (libico300.so):
 - Installing the 32-bit BSP API on a 64-bit system (Work done, extend readme).
 - Compiling and installing Paho MQTT C Library in 32-bit to match with BSP API to enable
 DIO, serial port configuration etc via MQTT (Work done, extend readme).
-- 
