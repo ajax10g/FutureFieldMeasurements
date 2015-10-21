@@ -12,6 +12,8 @@ on the 3.19.0-25-kernel. The edit is on line 329 where the ```smp_mb__before_cle
 
 - CD into the ```U20_usb_driver_for_ubuntu14.04``` directory and run
 ```make && make install```
+This step will compile and install the module in the current kernel. If the kernel is upgraded
+through apt with ```#apt-get update && apt-get upgrade``` the module needs to be recompiled.
 
 - Install ```wvdial``` by running ```#apt-get install wvdial```.
 
