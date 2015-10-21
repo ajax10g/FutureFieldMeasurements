@@ -38,6 +38,9 @@ defaultroute
 replacedefaultroute
 ```
 
+Also, if ppp0 is disabled, make sure there is a default gw for the main LAN connection (p4p1 on ico-300):
+```#route add default gw {GATEWAYIP} p4p1``` where the ```{GATEWAYIP}``` is replaced with the IP of the gateway you're using.
+
 Monitor and auto-reset modem if it hangs:
 
 - Create a cron job that pings for example Googles DNS (8.8.8.8) regularly,
