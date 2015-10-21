@@ -84,3 +84,9 @@ protocol websockets
 
 - Create 'mosquitto' user: ```useradd mosquitto```
 - Create an upstart job for mosquitto server using the ```/etc/mosquitto/mosquitto.conf``` file. The mosquitto.conf file used for configuration of the mosquitto server is found under /mosquitto in this repo and the mosquitto.conf file used for defining the upstart job (another mosquitto.conf) is found in the upstart folder in this repo.
+
+Using the Axiomtek BSP API (libico300.so):
+- Installing the 32-bit BSP API on a 64-bit system (Work done, extend readme).
+- Compiling and installing Paho MQTT C Library in 32-bit to match with BSP API to enable
+DIO, serial port configuration etc via MQTT (Work done, extend readme).
+- 
