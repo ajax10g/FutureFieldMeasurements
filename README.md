@@ -66,7 +66,7 @@ Setting up local mosquitto server as IPC with websockets enabled:
 - Run ```./buildconf```
 - Run ```./configure```
 - Run ```make && make install```
-- Install libwebsockets: ``#apt-get install libwebsockets```
+- Install libwebsockets: ``#apt-get install libwebsockets-dev```
 - Clone this repo: ```git clone https://git.eclipse.org/r/mosquitto/org.eclipse.mosquitto```
 - CD into org.eclipse.mosquttio
 - Run ```ccmake .```
