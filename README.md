@@ -89,3 +89,23 @@ Using the Axiomtek BSP API (libico300.so):
 - Installing the 32-bit BSP API on a 64-bit system (Work done, extend readme).
 - Compiling and installing Paho MQTT C Library in 32-bit to match with BSP API to enable
 DIO, serial port configuration etc via MQTT (Work done, extend readme).
+
+Compiling SOEM library in 32-bit version:
+- Clone this repo: https://github.com/OpenEtherCATsociety/SOEM
+- cd SOEM
+- mkdir build
+- cd build
+- ccmake ..
+- Press 't' to toggle advanced mode.
+- Find the CMAKE_C_FLAGS and press enter to edit the row.
+- Type in "-m32".
+- Press 'c' to configure and then 'e' to exit the output screen.
+- Then press 'g' to generate the makefiles.
+- Run ```make```
+- Copy the static library ```libsoem.a``` to /usr/lib: ```sudo cp libsoem.a /usr/lib```
+
+Creating a Ethercat master program with MQTT support:
+- See: ```ethercat/```
+- Note, the program is compiled with 32-bit support and the reason for this is that
+the MQTT-library is 32-bit to adapt to the 32-bit DIO-library. Of course the 64-bit
+library could be compiled and installed as well, but this is a start.
