@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
 				    pubmsg.qos = 1;
 				    pubmsg.retained = 0;
 				    MQTTClient_deliveryToken token;
-				    MQTTClient_publishMessage(client, "/dio/getdi/response", &pubmsg, &token);
+				    MQTTClient_publishMessage(client, "/response/dio/getdi", &pubmsg, &token);
 				    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
 				}
 			}

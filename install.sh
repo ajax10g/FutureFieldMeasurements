@@ -9,6 +9,8 @@ if [ $EUID -ne 0 ]; then
   exit 1
 fi
 
+service mosquitto stop
+
 #Copying upstart scripts
 echo "Copying upstart scripts to /etc/init."
 dir="upstart"
@@ -46,7 +48,7 @@ cp -r  $dir/include /etc/futurefieldmeasurements/$dir
 echo "Now restarting mosquitto and thus restarting all bus jobs."
 dir="mosquitto"
 cp  $dir/mosquitto.conf /etc/$dir/mosquitto.conf
-service mosquitto restart
+service mosquitto start
 
 echo "Loading crontab from file."
 crontab crontab
