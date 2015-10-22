@@ -28,7 +28,7 @@ dir="1-wire"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
 
 dir="ethercat"
-cp  $dir/main.py /etc/futurefieldmeasurements/$dir
+cp -r  $dir /etc/futurefieldmeasurements
 
 dir="mbus"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
