@@ -29,6 +29,14 @@
 // 3 = RS485_2W
 // Example: /dio/setcom 1,3 - Sets comport 1 to two-wire RS485.
 
+// Topic: /dio/getcputemp/<uuid>
+// Parameters: none
+// Response: Publishes a message on topic /response/dio/getcputemp/<uuid>
+// Where uuid is the supplied uuid in the topic from the sender.
+// Description: Reads the CPU temperature.
+// Example: /dio/getcputemp/9ajqla8 - Reads CPU temp.
+// (publish) (/response/dio/getdi/9ajqla8 39) - Response with CPU temo.
+
 
 #include "stdio.h"
 #include "stdlib.h"
