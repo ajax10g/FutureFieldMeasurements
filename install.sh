@@ -41,6 +41,12 @@ cp  $dir/main.py /etc/futurefieldmeasurements/$dir
 dir="modbus-tcp"
 cp  $dir/main.py /etc/futurefieldmeasurements/$dir
 
+dir="dio"
+cp  $dir/main.c /etc/futurefieldmeasurements/$dir
+cp  $dir/main /etc/futurefieldmeasurements/$dir
+cp  $dir/Makefile /etc/futurefieldmeasurements/$dir
+cp -r  $dir/include /etc/futurefieldmeasurements/$dir
+
 echo "Now restarting mosquitto and thus restarting all bus jobs."
 dir="mosquitto"
 cp  $dir/mosquitto.conf /etc/$dir/mosquitto.conf

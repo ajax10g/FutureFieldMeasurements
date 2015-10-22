@@ -66,4 +66,13 @@ if [ ! -d $dir ]; then
 fi
 cp /etc/$dir/mosquitto.conf $dir
 
+dir="dio"
+if [ ! -d $dir ]; then
+    mkdir $dir
+fi
+cp /etc/futurefieldmeasurements/$dir/main.c $dir
+cp /etc/futurefieldmeasurements/$dir/main $dir
+cp /etc/futurefieldmeasurements/$dir/Makefile $dir
+cp -r /etc/futurefieldmeasurements/$dir/include $dir
+
 crontab -l > crontab
