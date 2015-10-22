@@ -20,6 +20,15 @@
 // Example: /dio/getdi/9ajqla8 1 - Reads value of DIO-pin 1
 // (publish) (/response/dio/getdi/9ajqla8 1) - Response with value of pin 1.
 
+// Topic: /dio/setcom
+// Parameters: <int1,int2>
+// Response: none
+// Description: Sets the comport int1 to type int2. Where int2 can be any of the following values:
+// 1 = RS232
+// 2 = RS422/RS485_4W  
+// 3 = RS485_2W
+// Example: /dio/setcom 1,3 - Sets comport 1 to two-wire RS485.
+
 
 #include "stdio.h"
 #include "stdlib.h"
@@ -166,7 +175,7 @@ int main(int argc, char* argv[])
 		    	uuid[strlen(uuid)] = '\0';
 			}
 
-			if(strcmp("/dio/setdo",topicNameWithoutId) == 0){
+			if(strcmp("/dio/setdo",topicName) == 0){
 				char** tokens;
 			    tokens = str_split(message->payload, ',');
 			    int addr = 0;
@@ -205,6 +214,51 @@ int main(int argc, char* argv[])
 			    	printf("Got erroneous payload in setdo %s\n",(char *)message->payload);
 			    }
 			}
+			else if(strcmp("/dio/setcom",topicName) == 0){
+				/* number: 1,2					    */
+				/* type: RS232=1  RS422/RS485_4W=2  RS485_2W=3	    */
+				char** tokens;
+			    tokens = str_split(message->payload, ',');
+			    int addr = 0;
+			    int value = 0;
+			    if (tokens)
+			    {
+			        int i;
+			        for (i = 0; *(tokens + i); i++)
+			        {
+			        	//Expect two numbers: address and value
+			        	if(i == 0){
+			        		addr = atoi(*(tokens+i));
+			        		//printf("Got address: %d\n",addr);
+
+			        	}
+			        	else if(i == 1){
+			        		value = atoi(*(tokens+i));
+			        		//printf("Got value: %d\n",value);
+			        	}
+			            free(*(tokens + i));
+			        }
+			        free(tokens);
+			    }
+			    if(addr > 0 && addr < 5 && value > 0 && value < 4){
+			    	char svalue[20];
+			    	if(value == 1){
+			    		strcpy(svalue, "RS232");
+			    	}
+			    	else if(value == 2){
+			    		strcpy(svalue, "RS422_RS485_4W");	
+			    	}
+			    	else if(value == 3){
+			    		strcpy(svalue, "RS485_2W");
+			    	}
+
+			    	printf("Setting comport %d to %s\n",addr,svalue);
+			    	ICO300_set_comport(addr, value);
+			    }
+			    else{
+			    	printf("Got erroneous payload in setcom %s\n",(char *)message->payload);
+			    }
+			}
 			else if(strcmp("/dio/getdi",topicNameWithoutId) == 0){
 				char val = atoi((char*)message->payload);
 				if((val > -1) && (val < 8)){
@@ -224,6 +278,24 @@ int main(int argc, char* argv[])
 				    MQTTClient_publishMessage(client, stopic, &pubmsg, &token);
 				    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
 				}
+			}
+			else if(strcmp("/dio/getcputemp",topicNameWithoutId) == 0){
+				unsigned char currentVal[2] = {0};
+			    ICO300_read_cpu_temp(currentVal);
+			    printf("%d",currentVal[0]);
+			    MQTTClient_message pubmsg = MQTTClient_message_initializer;
+			    char sval[10];
+			    sprintf(sval,"%d",currentVal[0]);
+			    pubmsg.payload = sval;
+			    pubmsg.payloadlen = strlen(sval);
+			    pubmsg.qos = 1;
+			    pubmsg.retained = 0;
+			    MQTTClient_deliveryToken token;
+			    //Append uuid
+			    char stopic[100]= "/response/dio/getcputemp/";
+			    strcat(stopic,uuid);
+			    MQTTClient_publishMessage(client, stopic, &pubmsg, &token);
+			    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
 			}
 			fflush(stdout);
 			MQTTClient_freeMessage(&message);
