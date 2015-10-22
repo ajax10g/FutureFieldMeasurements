@@ -1,3 +1,26 @@
+// Author: Marcus Kempe, SP Technical Research Institute of Serden
+
+// Description:
+
+// This program listens for messages on the following topics:
+
+// Topic: /dio/setdo
+// Parameters: <int1,int2>
+// Response: none
+// Description: Sets DO-pin at address int1 to value at int2. Where
+// 0 < int1 < 8 and int2 is 0 or 1.
+// Example: /dio/setdo 1,1 - Sets DO-pin 1 to HIGH.
+// Example: /dio/setdo 1,0 - Sets DO pin 1 to LOW.
+
+// Topic: /dio/getdi/<uuid>
+// Parameters: <int1>
+// Response: Publishes a message on topic /response/dio/getdi/<uuid>
+// Where uuid is the supplied uuid in the topic from the sender.
+// Description: Reads the DOI-pin at address int1 and returns the value.
+// Example: /dio/getdi/9ajqla8 1 - Reads value of DIO-pin 1
+// (publish) (/response/dio/getdi/9ajqla8 1) - Response with value of pin 1.
+
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -6,6 +29,7 @@
 #include <unistd.h>
 #include <assert.h>
 #include "libico300.h"
+#include "time.h"
 #define ADDRESS 	"tcp://localhost:1883"
 #define CLIENTID	"Ico300"
 #define LISTEN_TOPIC	"/dio/#"
@@ -13,10 +37,21 @@
 #define TIMEOUT		10000L
 
 int toStop = 0;
+struct tm *tm;
+time_t t;
+char str_date[100];
+char str_time[100];
 
 void cfinish(int sig)
 {
-	printf("%s %d\n", "Got SIGINT or SIGTERM.", sig);
+
+	t = time(NULL);
+	tm = localtime(&t);
+
+	strftime(str_time, sizeof(str_time), "%H:%M:%S", tm);
+	strftime(str_date, sizeof(str_date), "%Y-%m-%d", tm);
+
+	printf("%s %d. %s %s\n", "Got SIGINT or SIGTERM:", sig, str_date, str_time);
 	signal(SIGINT, NULL);
 	toStop = 1;
 }
@@ -82,13 +117,20 @@ int main(int argc, char* argv[])
 	conn_opts.password = "test";
 	int showtopics = 0;
 	int nodelimiter = 1;
+
+	t = time(NULL);
+	tm = localtime(&t);
+
+	strftime(str_time, sizeof(str_time), "%H:%M:%S", tm);
+	strftime(str_date, sizeof(str_date), "%Y-%m-%d", tm);
+
 	if((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
 	{
-		printf("Failed to connect, return code %d\n", rc);
+		printf("Failed to connect, return code %d. %s %s\n", rc, str_date, str_time);
 		exit(-1);
 	}
 
-	printf("%s\n", "Connected.");
+	printf("Connected. %s %s\n",str_date,str_time);
 
 	signal(SIGINT, cfinish);
 	signal(SIGTERM, cfinish);
@@ -104,14 +146,27 @@ int main(int argc, char* argv[])
 		rc = MQTTClient_receive(client, &topicName, &topicLen, &message, 1000);
 		if (message)
 		{
-			// if (showtopics)
-			// 	printf("%s\t", topicName);
-   //    		if (nodelimiter)
-			// 	printf("%.*s", message->payloadlen, (char*)message->payload);
-			// else
-			// 	printf("%.*s%s", message->payloadlen, (char*)message->payload, "<DELIM>");
+			unsigned char i = 0;
+		    unsigned char slen = strlen(topicName);
+		    unsigned char lastSlash = 0;
+		    for(i = slen-1; i>=0; i--){
+		        if(*(topicName+i)==47){
+		            lastSlash = i;
+		            break;
+		        }
+		    }
 
-			if(strcmp("/dio/setdo",topicName) == 0){
+		    unsigned char topicNameWithoutId [50] = {0};
+		    unsigned char uuid [50] = {0};
+
+		    if(lastSlash > 0){
+		    	memcpy (topicNameWithoutId, topicName, lastSlash);
+		    	topicNameWithoutId[strlen(topicNameWithoutId)] = '\0';
+		    	memcpy (uuid, topicName+lastSlash+1, strlen(topicName)-lastSlash);
+		    	uuid[strlen(uuid)] = '\0';
+			}
+
+			if(strcmp("/dio/setdo",topicNameWithoutId) == 0){
 				char** tokens;
 			    tokens = str_split(message->payload, ',');
 			    int addr = 0;
@@ -150,7 +205,7 @@ int main(int argc, char* argv[])
 			    	printf("Got erroneous payload in setdo %s\n",(char *)message->payload);
 			    }
 			}
-			else if(strcmp("/dio/getdi",topicName) == 0){
+			else if(strcmp("/dio/getdi",topicNameWithoutId) == 0){
 				char val = atoi((char*)message->payload);
 				if((val > -1) && (val < 8)){
 				    unsigned char currentVal = 0;
@@ -163,7 +218,10 @@ int main(int argc, char* argv[])
 				    pubmsg.qos = 1;
 				    pubmsg.retained = 0;
 				    MQTTClient_deliveryToken token;
-				    MQTTClient_publishMessage(client, "/response/dio/getdi", &pubmsg, &token);
+				    //Append uuid
+				    char stopic[100]= "/response/dio/getdi/";
+				    strcat(stopic,uuid);
+				    MQTTClient_publishMessage(client, stopic, &pubmsg, &token);
 				    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
 				}
 			}
@@ -181,7 +239,13 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	printf("%s\n", "Stopping.");
+	t = time(NULL);
+	tm = localtime(&t);
+
+	strftime(str_time, sizeof(str_time), "%H:%M:%S", tm);
+	strftime(str_date, sizeof(str_date), "%Y-%m-%d", tm);
+
+	printf("%s %s %s\n", "Stopping.", str_date, str_time);
 	MQTTClient_disconnect(client, 10000);
 	MQTTClient_destroy(&client);
 	return rc;
