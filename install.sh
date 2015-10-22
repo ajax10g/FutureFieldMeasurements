@@ -12,11 +12,7 @@ fi
 #Copying upstart scripts
 echo "Copying upstart scripts to /etc/init."
 dir="upstart"
-cp $dir/1-wire.conf /etc/init
-cp $dir/ethercat.conf /etc/init
-cp $dir/mbus.conf /etc/init
-cp $dir/modbus-rtu.conf /etc/init
-cp $dir/modbus-tcp.conf /etc/init
+cp $dir/*.conf /etc/init
 
 #Get modem scripts
 echo "Copying modem scripts to /etc/futurefieldmeasurements."
