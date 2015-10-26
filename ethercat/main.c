@@ -22,7 +22,6 @@
 #include "ethercatconfig.h"
 #include "ethercatprint.h"
 #include "MQTTClient.h"
-#include "time.h"
 #define EC_TIMEOUTMON 500
 #define ADDRESS  "tcp://localhost:1883"
 #define CLIENTID  "Ico300"
@@ -32,6 +31,7 @@
 
 char IOmap[4096];
 OSAL_THREAD_HANDLE thread1;
+OSAL_THREAD_HANDLE mqttthread;
 int expectedWKC;
 boolean needlf;
 volatile int wkc;
@@ -60,7 +60,7 @@ void simpletest(char *ifname)
 
 
        if ( ec_config_init(FALSE) > 0 )
-      {
+       {
          printf("%d slaves found and configured.\n",ec_slavecount);
 
          ec_config_map(&IOmap);
@@ -163,7 +163,97 @@ void simpletest(char *ifname)
     {
         printf("No socket connection on %s\nExcecute as root\n",ifname);
     }   
-}   
+}  
+
+OSAL_THREAD_FUNC sendmqtt( void *ptr ) 
+{
+
+    MQTTClient client;
+    MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
+    int rc = 0;
+
+    MQTTClient_create(&client, ADDRESS, CLIENTID, MQTTCLIENT_PERSISTENCE_NONE, NULL);
+    conn_opts.keepAliveInterval = 20;
+    conn_opts.cleansession = 1;
+    conn_opts.username = "marcus";
+    conn_opts.password = "test";
+    int showtopics = 0;
+    int nodelimiter = 1;
+    int i, j, oloop, iloop, chk;
+
+
+
+    while(1)
+    {
+        ec_timet start = osal_current_time();
+        if( inOP )
+        {
+
+            if((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
+            {
+              printf("Failed to connect, return code %d. %s %s\n", rc, str_date, str_time);
+              return;
+            }
+            
+            oloop = ec_slave[0].Obytes;
+            if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
+            if (oloop > 8) oloop = 8;
+            iloop = ec_slave[0].Ibytes;
+            if ((iloop == 0) && (ec_slave[0].Ibits > 0)) iloop = 1;
+            if (iloop > 8) iloop = 8;
+
+            //printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
+            char send_str[100] = {'\0'};
+
+            for(j = 0 ; j < oloop; j++)
+            {
+                char temp_str_outputs[10] = {'\0'};;
+                if(j == 0){
+                  sprintf(temp_str_outputs,"%2.2x", *(ec_slave[0].outputs + j));
+
+                }
+                else{
+                  sprintf(temp_str_outputs,",%2.2x", *(ec_slave[0].outputs + j)); 
+                }
+                strcat(send_str, temp_str_outputs);
+            }
+
+            for(i = 0 ; i < iloop; i++)
+            {
+                char temp_str_inputs[10] = {'\0'};
+                // if(i == 0){
+                //   sprintf(temp_str_inputs,"%2.2x,", *(ec_slave[0].inputs + i));
+
+                // }
+                // else{
+                  sprintf(temp_str_inputs,",%2.2x", *(ec_slave[0].inputs + i)); 
+                //}
+                strcat(send_str, temp_str_inputs);
+            }
+            //printf(" T:%lld\r",ec_DCtime);
+
+            MQTTClient_message pubmsg = MQTTClient_message_initializer;
+            //char sval[10];
+            //sprintf(sval, "%2.2x,%2.2x", *(ec_slave[0].outputs), *(ec_slave[0].outputs+1));
+            pubmsg.payload = send_str;
+            pubmsg.payloadlen = strlen(send_str);
+            pubmsg.qos = 0;
+            pubmsg.retained = 0;
+            MQTTClient_deliveryToken token;
+            MQTTClient_publishMessage(client, "/ethercat/data", &pubmsg, &token);
+            rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
+        }
+        ec_timet end = osal_current_time();
+        ec_timet diff;
+        osal_time_diff(&start, &end, &diff);
+        printf("Done. Now sleeping for %d us\n",1000000-diff.usec);
+        osal_usleep(1000000-diff.usec); //Sleep for one sec nominally
+    }
+
+    printf("Destroying client.");
+    MQTTClient_disconnect(client, 10000);
+    MQTTClient_destroy(&client);
+}
 
 OSAL_THREAD_FUNC ecatcheck( void *ptr )
 {
@@ -243,41 +333,7 @@ OSAL_THREAD_FUNC ecatcheck( void *ptr )
 
 int main(int argc, char *argv[])
 {
-    MQTTClient client;
-    MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-    int rc = 0;
-
-    MQTTClient_create(&client, ADDRESS, CLIENTID, MQTTCLIENT_PERSISTENCE_NONE, NULL);
-    conn_opts.keepAliveInterval = 20;
-    conn_opts.cleansession = 1;
-    conn_opts.username = "marcus";
-    conn_opts.password = "test";
-    int showtopics = 0;
-    int nodelimiter = 1;
-
-    t = time(NULL);
-    tm = localtime(&t);
-
-    strftime(str_time, sizeof(str_time), "%H:%M:%S", tm);
-    strftime(str_date, sizeof(str_date), "%Y-%m-%d", tm);
-
-    if((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
-    {
-      printf("Failed to connect, return code %d. %s %s\n", rc, str_date, str_time);
-      return (1);
-    }
-
-    printf("Connected. %s %s\n",str_date,str_time);
-
-    MQTTClient_message pubmsg = MQTTClient_message_initializer;
-    char sval[10] = "Ethercat!";
-    pubmsg.payload = sval;
-    pubmsg.payloadlen = strlen(sval);
-    pubmsg.qos = 1;
-    pubmsg.retained = 0;
-    MQTTClient_deliveryToken token;
-    MQTTClient_publishMessage(client, "/ethercat/hello", &pubmsg, &token);
-    rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
+    
 
     printf("SOEM (Simple Open EtherCAT Master)\nSimple test\n");
 
@@ -286,6 +342,7 @@ int main(int argc, char *argv[])
         /* create thread to handle slave error handling in OP */
         //      pthread_create( &thread1, NULL, (void *) &ecatcheck, (void*) &ctime);   
         osal_thread_create(&thread1, 128000, &ecatcheck, (void*) &ctime);
+        osal_thread_create(&mqttthread, 128000, &sendmqtt, (void*) &ctime);
         /* start cyclic part */
         simpletest(argv[1]);
     }
@@ -293,7 +350,6 @@ int main(int argc, char *argv[])
     {
         printf("Usage: simple_test ifname1\nifname = eth0 for example\n");
     }   
-
     printf("End program\n");
     return (0);
 }
