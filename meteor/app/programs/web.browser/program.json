@@ -1,0 +1,65 @@
+{
+  "format": "web-program-pre1",
+  "manifest": [
+    {
+      "path": "b02331b1d11eadba5ab9d874afe86ae87f6d9aa0.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/b02331b1d11eadba5ab9d874afe86ae87f6d9aa0.js?meteor_js_resource=true",
+      "size": 416679,
+      "hash": "b02331b1d11eadba5ab9d874afe86ae87f6d9aa0"
+    },
+    {
+      "path": "932420ff7fbd1edcd66ac47be94a3595c19cddc0.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/932420ff7fbd1edcd66ac47be94a3595c19cddc0.css?meteor_css_resource=true",
+      "size": 102728,
+      "hash": "932420ff7fbd1edcd66ac47be94a3595c19cddc0"
+    },
+    {
+      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
+      "size": 20290,
+      "hash": "23799c0aa7b60fb1a66993d024f98ac105e74e93"
+    },
+    {
+      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
+      "size": 41236,
+      "hash": "536d2b1b2f3462fb122df1922f2e232546f1b11d"
+    },
+    {
+      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
+      "size": 62850,
+      "hash": "ecee9033d9183117d8f59df0e7238e2b24002b24"
+    },
+    {
+      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
+      "size": 23292,
+      "hash": "c6ea7b1a5bb16b160cc9b8a02f6f6371b5ef7b73"
+    },
+    {
+      "path": "head.html",
+      "where": "internal",
+      "type": "head",
+      "hash": "6547aa49c80c5f093f0dc6e2722e6a35afc2fcf1"
+    }
+  ]
+}
