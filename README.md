@@ -109,3 +109,57 @@ Creating a Ethercat master program with MQTT support:
 - Note, the program is compiled with 32-bit support and the reason for this is that
 the MQTT-library is 32-bit to adapt to the 32-bit DIO-library. Of course the 64-bit
 library could be compiled and installed as well, but this is a start.
+
+Sharing ppp0 network connection with local network (See: http://www.techytalk.info/internet-connection-sharing-without-network-manager-on-ubuntu-linux/comment-page-1/):
+- Configure network interfaces for LAN 2 on the ico-300
+```
+auto p1p1
+iface p1p1 inet static
+    address 192.168.1.5
+    netmask 255.255.255.0
+    network 192.168.1.0
+```
+- Toggle the interface
+```
+sudo ifup p1p1
+sudo ifdown p1p1
+```
+- Make sure ufw is installed and enabled
+```
+#apt-get install ufw
+```
+```
+#ufw enable
+```
+- Allow connections from local subnet
+```
+#ufw allow from 192.168.1.0/24
+```
+- Edit policies
+```
+#nano /etc/default/ufw
+```
+```DEFAULT_FORWARD_POLICY="DROP"``` to ```DEFAULT_FORWARD_POLICY="ACCEPT"```
+- Enable forwarding
+```
+#nano /etc/ufw/sysctl.conf
+```
+Uncomment:
+```
+#net/ipv4/ip_forward=1
+#net/ipv6/conf/default/forwarding=1
+```
+- Edit before rules ```#nano/etc/ufw/before.rules```, at the end of the file (after existing ```COMMIT```):
+```
+# Add rules for nat table
+*nat
+:POSTROUTING ACCEPT [0:0]
+ 
+# Forward traffic from eth0 through ppp0
+-A POSTROUTING -s 192.168.1.0/24 -o ppp0 -j MASQUERADE
+ 
+# Commit preceding nat table rules
+COMMIT
+```
+- Restart ufw:
+```#service ufw restart```
