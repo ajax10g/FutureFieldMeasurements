@@ -163,3 +163,21 @@ COMMIT
 ```
 - Restart ufw:
 ```#service ufw restart```
+
+Installing paho-mqtt-python-client
+```#apt-get install pip````
+```pip install paho-mqtt````
+Installing MongoDB
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+sudo apt-get update -y
+sudo apt-get install mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-tools -y
+```
+Installing Node
+```
+wget http://nodejs.org/dist/v0.10.36/node-v0.10.36-linux-x64.tar.gz
+sudo mv node-v0.10.36-linux-x64 /opt/nodejs
+sudo ln -sf /opt/nodejs/bin/node /usr/bin/node
+sudo ln -sf /opt/nodejs/bin/npm /usr/bin/npm
+```
