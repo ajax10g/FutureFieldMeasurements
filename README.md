@@ -200,6 +200,9 @@ export MONGO_URL=mongodb://127.0.0.1/future-field-meteor
 export ROOT_URL=http://localhost
 ```
 Installing meteor and running the app from node
+- Creating meteoruser
+- Creating meteor group
+- adding development user to group etc...
 ```
 TODO
 ```
