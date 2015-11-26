@@ -167,17 +167,39 @@ COMMIT
 Installing paho-mqtt-python-client
 ```#apt-get install pip````
 ```pip install paho-mqtt````
-Installing MongoDB
+
+Installing MongoDB - for meteor application
 ```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 sudo apt-get update -y
 sudo apt-get install mongodb-org mongodb-org-server mongodb-org-shell mongodb-org-tools -y
 ```
-Installing Node
+Installing Node - for meteor application
 ```
 wget http://nodejs.org/dist/v0.10.36/node-v0.10.36-linux-x64.tar.gz
 sudo mv node-v0.10.36-linux-x64 /opt/nodejs
 sudo ln -sf /opt/nodejs/bin/node /usr/bin/node
 sudo ln -sf /opt/nodejs/bin/npm /usr/bin/npm
+```
+Setting up directories under /opt/future-field-meteor for meteor app
+```
+sudo mkdir -p /opt/future-field-meteor/
+sudo mkdir -p /opt/future-field-meteor/config
+sudo mkdir -p /opt/future-field-meteor/tmp
+sudo chown ${USER} /opt/future-field-meteor -R
+```
+Installing forever etc for meteor app
+```
+sudo npm install -g forever userdown wait-for-mongo node-gyp
+```
+Creating environment variables for meteor:
+```
+export PORT=80
+export MONGO_URL=mongodb://127.0.0.1/future-field-meteor
+export ROOT_URL=http://localhost
+```
+Installing meteor and running the app from node
+```
+TODO
 ```
