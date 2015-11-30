@@ -401,8 +401,10 @@ def main():
     mqttc.loop_start()    
     while True:
         try:            
-            print getAll()
-            readAllTemps()            
+            getAll()
+            #readAllScratch()
+            readAllTemps()
+            #console.log(docToSend)            
             if docToSend:
                 mqttc.publish("/1-wire/data", json.dumps(docToSend), retain=False)
         except KeyboardInterrupt:

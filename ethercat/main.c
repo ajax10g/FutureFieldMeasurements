@@ -73,10 +73,10 @@ void simpletest(char *ifname)
 
          oloop = ec_slave[0].Obytes;
          if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
-         if (oloop > 8) oloop = 8;
+         //if (oloop > 8) oloop = 8;
          iloop = ec_slave[0].Ibytes;
          if ((iloop == 0) && (ec_slave[0].Ibits > 0)) iloop = 1;
-         if (iloop > 8) iloop = 8;
+         //if (iloop > 8) iloop = 8;
 
          printf("segments : %d : %d %d %d %d\n",ec_group[0].nsegments ,ec_group[0].IOsegment[0],ec_group[0].IOsegment[1],ec_group[0].IOsegment[2],ec_group[0].IOsegment[3]);
 
@@ -197,40 +197,46 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             
             oloop = ec_slave[0].Obytes;
             if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
-            if (oloop > 8) oloop = 8;
+            //if (oloop > 8) oloop = 8;
             iloop = ec_slave[0].Ibytes;
             if ((iloop == 0) && (ec_slave[0].Ibits > 0)) iloop = 1;
-            if (iloop > 8) iloop = 8;
+            //if (iloop > 8) iloop = 8;
 
             //printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
-            char send_str[100] = {'\0'};
+            char send_str[800] = {'\0'};
+            char inputprefix[300] = "{\"ibytes\": [";
+            char inputsuffix[300] = "], \"obytes\": [";
+            char outputsuffix[5] = "]}";
 
             for(j = 0 ; j < oloop; j++)
             {
-                char temp_str_outputs[10] = {'\0'};;
+                char temp_str_outputs[50] = {'\0'};;
                 if(j == 0){
-                  sprintf(temp_str_outputs,"%2.2x", *(ec_slave[0].outputs + j));
-
+                  sprintf(temp_str_outputs,"0x%2.2x", *(ec_slave[0].outputs + j));
                 }
                 else{
-                  sprintf(temp_str_outputs,",%2.2x", *(ec_slave[0].outputs + j)); 
+                  sprintf(temp_str_outputs,",0x%2.2x", *(ec_slave[0].outputs + j)); 
                 }
-                strcat(send_str, temp_str_outputs);
+                //strcat(send_str, temp_str_outputs);
+                strcat(inputsuffix, temp_str_outputs);
             }
 
             for(i = 0 ; i < iloop; i++)
             {
-                char temp_str_inputs[10] = {'\0'};
-                // if(i == 0){
-                //   sprintf(temp_str_inputs,"%2.2x,", *(ec_slave[0].inputs + i));
-
-                // }
-                // else{
-                  sprintf(temp_str_inputs,",%2.2x", *(ec_slave[0].inputs + i)); 
-                //}
-                strcat(send_str, temp_str_inputs);
+                char temp_str_inputs[50] = {'\0'};
+                if(i == 0){
+                   sprintf(temp_str_inputs,"0x%2.2x", *(ec_slave[0].inputs + i));
+                }
+                else{
+                  sprintf(temp_str_inputs,",0x%2.2x", *(ec_slave[0].inputs + i)); 
+                }
+                //strcat(send_str, temp_str_inputs);
+                strcat(inputprefix, temp_str_inputs);
             }
             //printf(" T:%lld\r",ec_DCtime);
+            strcat(inputprefix, inputsuffix);
+            strcat(inputprefix, outputsuffix);
+            strcat(send_str, inputprefix);
 
             MQTTClient_message pubmsg = MQTTClient_message_initializer;
             //char sval[10];
@@ -246,8 +252,8 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
         ec_timet end = osal_current_time();
         ec_timet diff;
         osal_time_diff(&start, &end, &diff);
-        printf("Done. Now sleeping for %d us\n",1000000-diff.usec);
-        osal_usleep(1000000-diff.usec); //Sleep for one sec nominally
+        printf("Done. Now sleeping for %d us\n",10000000-diff.usec);
+        osal_usleep(10000000-diff.usec); //Sleep for 10 sec nominally
     }
 
     printf("Destroying client.");

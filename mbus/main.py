@@ -87,10 +87,10 @@ if __name__ == "__main__":
                         points.append(point)
                     psend = '\n'.join(points)
 
-                    print points
+                    #print points
 
                     mqttc.publish("/mbus/data", json.dumps(todbdict), retain=True)
-                    print "Data sent to mqtt."
+                    #print "Data sent to mqtt."
         except KeyError as ke:
             print "Key error",ke
             pass
