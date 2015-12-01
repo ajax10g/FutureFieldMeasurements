@@ -69,6 +69,18 @@ def readAllTemps():
         #command('R')
         readTemp(second)
 
+def readAllCounters():
+    #command('R')
+    first = command('F1D')
+    #command('R')
+    readCounter(first)
+    second = ""
+    while second != None:
+        #command('R')
+        second = command('f')
+        #command('R')
+        readCounter(second)
+
 def readAllHum():
     command('R')
     first = command('F26')
@@ -93,6 +105,50 @@ def readAllSoil():
         command('R')
         readHum(second)
 	
+def readCounter(first=None):
+    if first == None:
+        print "No connected counters"
+        return
+    else:
+        print first
+        unit = first[len(first)-4:len(first)]
+        #print command('M')
+        #value = command('G')
+        #print value
+        #value = command('g')
+        #print value
+        #command('R')
+        #command('R')
+        #command('R')
+        command('R')
+        command('F1D')
+
+        command('M')
+        command("W20A5C001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF\r") #29 first data bytes
+        command("W03FFFFFF\r") #3 remaining data bytes
+        valueA = command("W04FFFFFFFF\r") #Count
+        command("W04FFFFFFFF\r") #Zeros
+        command("W02FFFF\r") #CRC
+	b0 = int(valueA[2:4]+valueA[0:2],16)
+	b1 = int(valueA[6:8]+valueA[4:6],16) << 16
+        countsA = b0+b1        
+        print "Counter value A: ",countsA
+        command('R')
+
+        command('M')
+        command("W20A5E001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF\r") #29 first data bytes
+        command("W03FFFFFF\r") #3 remaining data bytes
+        valueB = command("W04FFFFFFFF\r") #Count
+        command("W04FFFFFFFF\r") #Zeros
+        command("W02FFFF\r") #CRC
+	b0 = int(valueB[2:4]+valueB[0:2],16)
+	b1 = int(valueB[6:8]+valueB[4:6],16) << 16
+        countsB = b0+b1        
+        print "Counter value B: ",countsB
+        command('R')
+
+        docToSend[first] = {'counterA':countsA,'counterB':countsB}               
+
 def readSoil(first=None):
     if first == None:
         print "No connected soil meters"
@@ -401,12 +457,14 @@ def main():
     mqttc.loop_start()    
     while True:
         try:            
-            getAll()
+            print getAll()
             #readAllScratch()
             readAllTemps()
             #console.log(docToSend)            
+            readAllCounters()
             if docToSend:
                 mqttc.publish("/1-wire/data", json.dumps(docToSend), retain=False)
+            time.sleep(2)
         except KeyboardInterrupt:
             raise
         except:
