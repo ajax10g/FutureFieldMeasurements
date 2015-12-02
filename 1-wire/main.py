@@ -463,6 +463,7 @@ def main():
             #console.log(docToSend)            
             readAllCounters()
             if docToSend:
+                docToSend["time"] = int(round(time.time()*1000))
                 mqttc.publish("/1-wire/data", json.dumps(docToSend), retain=False)
             time.sleep(2)
         except KeyboardInterrupt:
