@@ -1,4 +1,4 @@
-CFLAGS += -g -lpaho-mqtt3c -lsoem -lpthread -L /usr/lib -lpthread -m32
+CFLAGS += -g -lpaho-mqtt3c -lsoem -lpthread -L /usr/lib -lpthread -lm -m32
 
 
 PROJECT=main
@@ -6,7 +6,7 @@ PROJECT=main
 all: ${PROJECT}
 
 main:
-	$(CC) -o main main.c $(CFLAGS) -I include
+	$(CC) include/cJSON.c -o main main.c $(CFLAGS) -I include
 
 clean:
 	rm -rf *.o ${PROJECT}

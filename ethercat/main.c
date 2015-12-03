@@ -31,6 +31,8 @@
 #define QOS     1
 #define TIMEOUT   10000L
 
+ #import "cJSON.h"
+
 char IOmap[4096];
 OSAL_THREAD_HANDLE thread1;
 OSAL_THREAD_HANDLE mqttthread;
@@ -529,6 +531,7 @@ struct Signal {
     int abs_bit;
     int bitlen;
     char type[24];
+    char name[24];
 };
 
 struct Slave {
@@ -612,6 +615,7 @@ int si_PDOassign(uint16 slave, uint16 PDOassign, int mapoffset, int bitoffset, i
                     {
                         printf(" %-12s %s\n", dtype2string(OElist.DataType[obj_subidx]), OElist.Name[obj_subidx]);
                         sprintf(tmpSig->type,"%s",dtype2string(OElist.DataType[obj_subidx]));
+                        sprintf(tmpSig->name,"%s",OElist.Name[obj_subidx]);
                     }
                     else
                         printf("\n");
@@ -828,9 +832,10 @@ int si_siiPDO(uint16 slave, uint8 t, int mapoffset, int bitoffset)
 
                         tmpSig->abs_offset = abs_offset;
                         tmpSig->abs_bit = abs_bit;
-                        tmpSig->bitlen = bitlen;  
+                        tmpSig->bitlen = bitlen;
 
                         sprintf(tmpSig->type,"%s",dtype2string(obj_datatype));
+                        sprintf(tmpSig->name,"%s",str_name);
 
                         struct Slave *tmpSlave = &slaves[slave];   
                         if(t == 0){
@@ -889,135 +894,206 @@ int si_map_sii(int slave)
 
 void slaveinfo(char *ifname)
 {
-   int cnt, i, j, nSM;
+    int cnt, i, j, nSM;
     uint16 ssigen;
     int expectedWKC;
 
-   printf("Starting slaveinfo\n");
+    printf("Starting slaveinfo\n");
 
-   /* initialise SOEM, bind socket to ifname */
-   if (ec_init(ifname))
-   {
-      printf("ec_init on %s succeeded.\n",ifname);
-      /* find and auto-config slaves */
-      if ( ec_config(FALSE, &IOmap) > 0 )
-      {
-         ec_configdc();
-         while(EcatError) printf("%s", ec_elist2string());
-         printf("%d slaves found and configured.\n",ec_slavecount);
-         expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
-         printf("Calculated workcounter %d\n", expectedWKC);
-         /* wait for all slaves to reach SAFE_OP state */
-         ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 3);
-         if (ec_slave[0].state != EC_STATE_SAFE_OP )
-         {
-            printf("Not all slaves reached safe operational state.\n");
-            ec_readstate();
-            for(i = 1; i<=ec_slavecount ; i++)
-            {
-               if(ec_slave[i].state != EC_STATE_SAFE_OP)
-               {
-                  printf("Slave %d State=%2x StatusCode=%4x : %s\n",
-                     i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
-               }
-            }
-         }
-
-
-         ec_readstate();
-         for( cnt = 1 ; cnt <= ec_slavecount ; cnt++)
-         {  
-            printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n", cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits);
-
-
-            sprintf(slaves[cnt].name,"%s",ec_slave[cnt].name);             
-            /*printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n State: %d\n Delay: %d[ns]\n Has DC: %d\n",
-                  cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits,
-                  ec_slave[cnt].state, ec_slave[cnt].pdelay, ec_slave[cnt].hasdc);
-            if (ec_slave[cnt].hasdc) printf(" DCParentport:%d\n", ec_slave[cnt].parentport);
-            printf(" Activeports:%d.%d.%d.%d\n", (ec_slave[cnt].activeports & 0x01) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x02) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x04) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x08) > 0 );
-            printf(" Configured address: %4.4x\n", ec_slave[cnt].configadr);
-            printf(" Man: %8.8x ID: %8.8x Rev: %8.8x\n", (int)ec_slave[cnt].eep_man, (int)ec_slave[cnt].eep_id, (int)ec_slave[cnt].eep_rev);
-            for(nSM = 0 ; nSM < EC_MAXSM ; nSM++)
-            {
-               if(ec_slave[cnt].SM[nSM].StartAddr > 0)
-                  printf(" SM%1d A:%4.4x L:%4d F:%8.8x Type:%d\n",nSM, ec_slave[cnt].SM[nSM].StartAddr, ec_slave[cnt].SM[nSM].SMlength,
-                         (int)ec_slave[cnt].SM[nSM].SMflags, ec_slave[cnt].SMtype[nSM]);
-            }
-            for(j = 0 ; j < ec_slave[cnt].FMMUunused ; j++)
-            {
-               printf(" FMMU%1d Ls:%8.8x Ll:%4d Lsb:%d Leb:%d Ps:%4.4x Psb:%d Ty:%2.2x Act:%2.2x\n", j,
-                       (int)ec_slave[cnt].FMMU[j].LogStart, ec_slave[cnt].FMMU[j].LogLength, ec_slave[cnt].FMMU[j].LogStartbit,
-                       ec_slave[cnt].FMMU[j].LogEndbit, ec_slave[cnt].FMMU[j].PhysStart, ec_slave[cnt].FMMU[j].PhysStartBit,
-                       ec_slave[cnt].FMMU[j].FMMUtype, ec_slave[cnt].FMMU[j].FMMUactive);
-            }
-            printf(" FMMUfunc 0:%d 1:%d 2:%d 3:%d\n",
-                     ec_slave[cnt].FMMU0func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU3func);
-            printf(" MBX length wr: %d rd: %d MBX protocols : %2.2x\n", ec_slave[cnt].mbx_l, ec_slave[cnt].mbx_rl, ec_slave[cnt].mbx_proto);
-            ssigen = ec_siifind(cnt, ECT_SII_GENERAL);
-            77SII general section
-            if (ssigen)
-            {
-               ec_slave[cnt].CoEdetails = ec_siigetbyte(cnt, ssigen + 0x07);
-               ec_slave[cnt].FoEdetails = ec_siigetbyte(cnt, ssigen + 0x08);
-               ec_slave[cnt].EoEdetails = ec_siigetbyte(cnt, ssigen + 0x09);
-               ec_slave[cnt].SoEdetails = ec_siigetbyte(cnt, ssigen + 0x0a);
-               if((ec_siigetbyte(cnt, ssigen + 0x0d) & 0x02) > 0)
-               {
-                  ec_slave[cnt].blockLRW = 1;
-                  ec_slave[0].blockLRW++;
-               }
-               ec_slave[cnt].Ebuscurrent = ec_siigetbyte(cnt, ssigen + 0x0e);
-               ec_slave[cnt].Ebuscurrent += ec_siigetbyte(cnt, ssigen + 0x0f) << 8;
-               ec_slave[0].Ebuscurrent += ec_slave[cnt].Ebuscurrent;
-            }
-            printf(" CoE details: %2.2x FoE details: %2.2x EoE details: %2.2x SoE details: %2.2x\n",
-                    ec_slave[cnt].CoEdetails, ec_slave[cnt].FoEdetails, ec_slave[cnt].EoEdetails, ec_slave[cnt].SoEdetails);
-            printf(" Ebus current: %d[mA]\n only LRD/LWR:%d\n",
-                    ec_slave[cnt].Ebuscurrent, ec_slave[cnt].blockLRW);
-            */
-
-            //Get PDOs
-            //if ((ec_slave[cnt].mbx_proto & 0x04))
-            //    si_sdo(cnt);
+    /* initialise SOEM, bind socket to ifname */
+    if (ec_init(ifname))
+    {
+        printf("ec_init on %s succeeded.\n",ifname);
+        /* find and auto-config slaves */
+        if ( ec_config(FALSE, &IOmap) > 0 )
+        {
+            ec_configdc();
+            while(EcatError) printf("%s", ec_elist2string());
+            printf("%d slaves found and configured.\n",ec_slavecount);
             
-            if (ec_slave[cnt].mbx_proto & 0x04)
-                si_map_sdo(cnt);
-            else
-               si_map_sii(cnt);      //Digital signals EL2004 EL1004      
-         }
-         int m;
-         for(m = 0; m < 10 ;m++){
-            //if(slaves[m]){
-            int n;
-            for(n = 0; n < slaves[m].nofInputs;n++){
-                printf("Slave: %d (%s), Input: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s\n",m,slaves[m].name,n,slaves[m].inputs[n].bitlen,slaves[m].inputs[n].abs_offset,slaves[m].inputs[n].abs_bit,slaves[m].inputs[n].type);
+            expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
+            printf("Calculated workcounter %d\n", expectedWKC);
+            
+            /* wait for all slaves to reach SAFE_OP state */
+            ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 3);
+            if (ec_slave[0].state != EC_STATE_SAFE_OP )
+            {
+                printf("Not all slaves reached safe operational state.\n");
+                ec_readstate();
+                for(i = 1; i<=ec_slavecount ; i++)
+                {
+                    if(ec_slave[i].state != EC_STATE_SAFE_OP)
+                    {
+                        printf("Slave %d State=%2x StatusCode=%4x : %s\n",
+                        i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
+                    }
+                }
             }
-            for(n = 0; n < slaves[m].nofOutputs;n++){
-                printf("Slave: %d (%s), Output: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s\n",m,slaves[m].name,n,slaves[m].outputs[n].bitlen,slaves[m].outputs[n].abs_offset,slaves[m].outputs[n].abs_bit,slaves[m].outputs[n].type);
+
+
+            ec_readstate();
+            for( cnt = 1 ; cnt <= ec_slavecount ; cnt++)
+            {  
+                printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n", cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits);
+
+
+                sprintf(slaves[cnt].name,"%s",ec_slave[cnt].name);             
+                /*printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n State: %d\n Delay: %d[ns]\n Has DC: %d\n",
+                      cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits,
+                      ec_slave[cnt].state, ec_slave[cnt].pdelay, ec_slave[cnt].hasdc);
+                if (ec_slave[cnt].hasdc) printf(" DCParentport:%d\n", ec_slave[cnt].parentport);
+                printf(" Activeports:%d.%d.%d.%d\n", (ec_slave[cnt].activeports & 0x01) > 0 ,
+                                             (ec_slave[cnt].activeports & 0x02) > 0 ,
+                                             (ec_slave[cnt].activeports & 0x04) > 0 ,
+                                             (ec_slave[cnt].activeports & 0x08) > 0 );
+                printf(" Configured address: %4.4x\n", ec_slave[cnt].configadr);
+                printf(" Man: %8.8x ID: %8.8x Rev: %8.8x\n", (int)ec_slave[cnt].eep_man, (int)ec_slave[cnt].eep_id, (int)ec_slave[cnt].eep_rev);
+                for(nSM = 0 ; nSM < EC_MAXSM ; nSM++)
+                {
+                   if(ec_slave[cnt].SM[nSM].StartAddr > 0)
+                      printf(" SM%1d A:%4.4x L:%4d F:%8.8x Type:%d\n",nSM, ec_slave[cnt].SM[nSM].StartAddr, ec_slave[cnt].SM[nSM].SMlength,
+                             (int)ec_slave[cnt].SM[nSM].SMflags, ec_slave[cnt].SMtype[nSM]);
+                }
+                for(j = 0 ; j < ec_slave[cnt].FMMUunused ; j++)
+                {
+                   printf(" FMMU%1d Ls:%8.8x Ll:%4d Lsb:%d Leb:%d Ps:%4.4x Psb:%d Ty:%2.2x Act:%2.2x\n", j,
+                           (int)ec_slave[cnt].FMMU[j].LogStart, ec_slave[cnt].FMMU[j].LogLength, ec_slave[cnt].FMMU[j].LogStartbit,
+                           ec_slave[cnt].FMMU[j].LogEndbit, ec_slave[cnt].FMMU[j].PhysStart, ec_slave[cnt].FMMU[j].PhysStartBit,
+                           ec_slave[cnt].FMMU[j].FMMUtype, ec_slave[cnt].FMMU[j].FMMUactive);
+                }
+                printf(" FMMUfunc 0:%d 1:%d 2:%d 3:%d\n",
+                         ec_slave[cnt].FMMU0func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU3func);
+                printf(" MBX length wr: %d rd: %d MBX protocols : %2.2x\n", ec_slave[cnt].mbx_l, ec_slave[cnt].mbx_rl, ec_slave[cnt].mbx_proto);
+                ssigen = ec_siifind(cnt, ECT_SII_GENERAL);
+                77SII general section
+                if (ssigen)
+                {
+                   ec_slave[cnt].CoEdetails = ec_siigetbyte(cnt, ssigen + 0x07);
+                   ec_slave[cnt].FoEdetails = ec_siigetbyte(cnt, ssigen + 0x08);
+                   ec_slave[cnt].EoEdetails = ec_siigetbyte(cnt, ssigen + 0x09);
+                   ec_slave[cnt].SoEdetails = ec_siigetbyte(cnt, ssigen + 0x0a);
+                   if((ec_siigetbyte(cnt, ssigen + 0x0d) & 0x02) > 0)
+                   {
+                      ec_slave[cnt].blockLRW = 1;
+                      ec_slave[0].blockLRW++;
+                   }
+                   ec_slave[cnt].Ebuscurrent = ec_siigetbyte(cnt, ssigen + 0x0e);
+                   ec_slave[cnt].Ebuscurrent += ec_siigetbyte(cnt, ssigen + 0x0f) << 8;
+                   ec_slave[0].Ebuscurrent += ec_slave[cnt].Ebuscurrent;
+                }
+                printf(" CoE details: %2.2x FoE details: %2.2x EoE details: %2.2x SoE details: %2.2x\n",
+                        ec_slave[cnt].CoEdetails, ec_slave[cnt].FoEdetails, ec_slave[cnt].EoEdetails, ec_slave[cnt].SoEdetails);
+                printf(" Ebus current: %d[mA]\n only LRD/LWR:%d\n",
+                        ec_slave[cnt].Ebuscurrent, ec_slave[cnt].blockLRW);
+                */
+
+                //Get PDOs
+                //if ((ec_slave[cnt].mbx_proto & 0x04))
+                //    si_sdo(cnt);
+            
+                if (ec_slave[cnt].mbx_proto & 0x04)
+                    si_map_sdo(cnt);
+                else
+                    si_map_sii(cnt);      //Digital signals EL2004 EL1004      
             }
-            //}
+
+            int m;
+
+            cJSON *jsonroot;
+            cJSON *jsonslaves;
+
+            jsonroot = cJSON_CreateObject();
+            cJSON_AddItemToObject(jsonroot, "slaves", jsonslaves=cJSON_CreateArray());
+         
+            for(m = 0; m < 10 ;m++){
+                if(strcmp(slaves[m].name,"")){
+                    cJSON *tmpjsonslave;
+                    cJSON_AddItemToArray(jsonslaves, tmpjsonslave=cJSON_CreateObject());
+
+                    cJSON_AddStringToObject(tmpjsonslave, "name", slaves[m].name);
+
+                    int n;
+                    cJSON *jsoninputs;
+                    cJSON_AddItemToObject(tmpjsonslave, "inputs", jsoninputs=cJSON_CreateArray());
+                    for(n = 0; n < slaves[m].nofInputs;n++){
+                        cJSON *tmpjsonsignal;
+                        cJSON_AddItemToArray(jsoninputs, tmpjsonsignal=cJSON_CreateObject());
+                        cJSON_AddNumberToObject(tmpjsonsignal, "bitlength", slaves[m].inputs[n].bitlen);
+                        cJSON_AddNumberToObject(tmpjsonsignal, "offsetbyte", slaves[m].inputs[n].abs_offset);
+                        cJSON_AddNumberToObject(tmpjsonsignal, "offsetbit", slaves[m].inputs[n].abs_bit);
+                        cJSON_AddStringToObject(tmpjsonsignal, "type", slaves[m].inputs[n].type);
+                        cJSON_AddStringToObject(tmpjsonsignal, "name", slaves[m].inputs[n].name);
+                        printf("Slave: %d (%s), Input: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s, Name: %s\n",m,slaves[m].name,n,slaves[m].inputs[n].bitlen,slaves[m].inputs[n].abs_offset,slaves[m].inputs[n].abs_bit,slaves[m].inputs[n].type,slaves[m].inputs[n].name);
+                    }
+
+                    cJSON *jsonoutputs;
+                    cJSON_AddItemToObject(tmpjsonslave, "outputs", jsonoutputs=cJSON_CreateArray());
+                    for(n = 0; n < slaves[m].nofOutputs;n++){
+                        cJSON *tmpjsonsignal;
+                        cJSON_AddItemToArray(jsonoutputs, tmpjsonsignal=cJSON_CreateObject());
+                        cJSON_AddNumberToObject(tmpjsonsignal, "bitlength", slaves[m].outputs[n].bitlen);
+                        cJSON_AddNumberToObject(tmpjsonsignal, "offsetbyte", slaves[m].outputs[n].abs_offset);
+                        cJSON_AddNumberToObject(tmpjsonsignal, "offsetbit", slaves[m].outputs[n].abs_bit);
+                        cJSON_AddStringToObject(tmpjsonsignal, "type", slaves[m].outputs[n].type);
+                        cJSON_AddStringToObject(tmpjsonsignal, "name", slaves[m].outputs[n].name);
+                        printf("Slave: %d (%s), Output: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s\n",m,slaves[m].name,n,slaves[m].outputs[n].bitlen,slaves[m].outputs[n].abs_offset,slaves[m].outputs[n].abs_bit,slaves[m].outputs[n].type,slaves[m].outputs[n].name);
+                    }
+                }
             //else{
             //    printf("End of array or gap in array")
             //    break;
             //}
-         }
-      }
-      else
-      {
-         printf("No slaves found!\n");
-      }
-      printf("End slaveinfo, close socket\n");
-      /* stop SOEM, close socket */
-      ec_close();
-   }
-   else
-   {
+            }
+
+            MQTTClient client;
+            MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
+            int rc = 0;
+
+            MQTTClient_create(&client, ADDRESS, CLIENTID, MQTTCLIENT_PERSISTENCE_NONE, NULL);
+            conn_opts.keepAliveInterval = 20;
+            conn_opts.cleansession = 1;
+            conn_opts.username = "marcus";
+            conn_opts.password = "test";
+
+            if((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
+            {
+              printf("Failed to connect, return code %d. %s %s\n", rc, str_date, str_time);
+              return;
+            }
+
+            char *out;
+            out=cJSON_PrintUnformatted(jsonroot);
+            cJSON_Delete(jsonroot);
+
+            MQTTClient_message pubmsg = MQTTClient_message_initializer;
+            //char sval[10];
+            //sprintf(sval, "%2.2x,%2.2x", *(ec_slave[0].outputs), *(ec_slave[0].outputs+1));
+            pubmsg.payload = out;
+            pubmsg.payloadlen = strlen(out);
+            pubmsg.qos = 0;
+            pubmsg.retained = 0;
+            MQTTClient_deliveryToken token;
+            MQTTClient_publishMessage(client, "/ethercat/units", &pubmsg, &token);
+            rc = MQTTClient_waitForCompletion(client, token, TIMEOUT);
+
+            MQTTClient_disconnect(client, 10000);
+            MQTTClient_destroy(&client);
+
+            printf("%s\n",out);
+            free(out);
+        }
+        else
+        {
+            printf("No slaves found!\n");
+        }
+        printf("End slaveinfo, close socket\n");
+        /* stop SOEM, close socket */
+        ec_close();
+    }
+    else
+    {
       printf("No socket connection on %s\nExcecute as root\n",ifname);
-   }
+    }
 }
 
 int main(int argc, char *argv[])
