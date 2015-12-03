@@ -401,10 +401,10 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             {
                 char temp_str_outputs[50] = {'\0'};;
                 if(j == 0){
-                  sprintf(temp_str_outputs,"0x%2.2x", *(ec_slave[0].outputs + j));
+                  sprintf(temp_str_outputs,"%d", *(ec_slave[0].outputs + j));
                 }
                 else{
-                  sprintf(temp_str_outputs,",0x%2.2x", *(ec_slave[0].outputs + j)); 
+                  sprintf(temp_str_outputs,",%d", *(ec_slave[0].outputs + j)); 
                 }
                 //strcat(send_str, temp_str_outputs);
                 strcat(inputsuffix, temp_str_outputs);
@@ -414,10 +414,10 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             {
                 char temp_str_inputs[50] = {'\0'};
                 if(i == 0){
-                   sprintf(temp_str_inputs,"0x%2.2x", *(ec_slave[0].inputs + i));
+                   sprintf(temp_str_inputs,"%d", *(ec_slave[0].inputs + i));
                 }
                 else{
-                  sprintf(temp_str_inputs,",0x%2.2x", *(ec_slave[0].inputs + i)); 
+                  sprintf(temp_str_inputs,",%d", *(ec_slave[0].inputs + i)); 
                 }
                 //strcat(send_str, temp_str_inputs);
                 strcat(inputprefix, temp_str_inputs);
