@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "ethercattype.h"
 #include "nicdrv.h"
@@ -31,7 +32,7 @@
 #define QOS     1
 #define TIMEOUT   10000L
 
- #import "cJSON.h"
+#include "cJSON.h"
 
 char IOmap[4096];
 OSAL_THREAD_HANDLE thread1;
@@ -302,7 +303,7 @@ void simpletest(char *ifname)
 
                     if(wkc >= expectedWKC)
                     {
-                        printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
+                        /*printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
 
                         for(j = 0 ; j < oloop; j++)
                         {
@@ -314,7 +315,7 @@ void simpletest(char *ifname)
                         {
                             printf(" %2.2x", *(ec_slave[0].inputs + j));
                         }   
-                        printf(" T:%lld\r",ec_DCtime);
+                        printf(" T:%lld\r",ec_DCtime);*/
                         needlf = TRUE;
                     }
                     osal_usleep(5000);
@@ -381,7 +382,8 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             if((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
             {
               printf("Failed to connect, return code %d. %s %s\n", rc, str_date, str_time);
-              return;
+              osal_usleep(1000000);
+              continue;
             }
             
             oloop = ec_slave[0].Obytes;
@@ -393,7 +395,15 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
 
             //printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
             char send_str[800] = {'\0'};
-            char inputprefix[300] = "{\"ibytes\": [";
+
+	    struct timeval tv;
+            gettimeofday(&tv,NULL);
+            uint64_t ms = tv.tv_sec*(uint64_t)1000+tv.tv_usec/1000;
+
+            printf("Sending first message!");
+
+            char inputprefix[300] = {'\0'};
+            sprintf(inputprefix,"{\"timestamp\":%llu,\"ibytes\": [",ms);
             char inputsuffix[300] = "], \"obytes\": [";
             char outputsuffix[5] = "]}";
 
@@ -426,6 +436,7 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             strcat(inputprefix, inputsuffix);
             strcat(inputprefix, outputsuffix);
             strcat(send_str, inputprefix);
+            printf("%s",send_str);
 
             MQTTClient_message pubmsg = MQTTClient_message_initializer;
             //char sval[10];
@@ -542,7 +553,7 @@ struct Slave {
     int nofOutputs; 
 };
 
-struct Slave slaves[20] = {NULL};
+struct Slave slaves[20];
 int nofSlaves = 0;
 
 /** Read PDO assign structure */
@@ -1036,7 +1047,7 @@ void slaveinfo(char *ifname)
                         cJSON_AddNumberToObject(tmpjsonsignal, "offsetbit", slaves[m].outputs[n].abs_bit);
                         cJSON_AddStringToObject(tmpjsonsignal, "type", slaves[m].outputs[n].type);
                         cJSON_AddStringToObject(tmpjsonsignal, "name", slaves[m].outputs[n].name);
-                        printf("Slave: %d (%s), Output: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s\n",m,slaves[m].name,n,slaves[m].outputs[n].bitlen,slaves[m].outputs[n].abs_offset,slaves[m].outputs[n].abs_bit,slaves[m].outputs[n].type,slaves[m].outputs[n].name);
+                        printf("Slave: %d (%s), Output: %d, Bitlength: %d, Offsetbyte: %d, Offsetbit: %d, Type: %s, Name: %s\n",m,slaves[m].name,n,slaves[m].outputs[n].bitlen,slaves[m].outputs[n].abs_offset,slaves[m].outputs[n].abs_bit,slaves[m].outputs[n].type,slaves[m].outputs[n].name);
                     }
                 }
             //else{
