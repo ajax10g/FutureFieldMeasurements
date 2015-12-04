@@ -403,7 +403,7 @@ OSAL_THREAD_FUNC sendmqtt( void *ptr )
             printf("Sending first message!");
 
             char inputprefix[300] = {'\0'};
-            sprintf(inputprefix,"{\"timestamp\":%llu,\"ibytes\": [",ms);
+            sprintf(inputprefix,"{\"time\":%llu,\"ibytes\": [",ms);
             char inputsuffix[300] = "], \"obytes\": [";
             char outputsuffix[5] = "]}";
 
