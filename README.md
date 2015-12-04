@@ -168,6 +168,11 @@ Installing paho-mqtt-python-client
 ```#apt-get install pip````
 ```pip install paho-mqtt````
 
+Installing modbus-tk for serial modbus
+```
+pip install modbus-tk
+```
+
 Installing MongoDB - for meteor application
 ```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
