@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
                     todbdict = {}
                     for pid in elm1dict["result"]["points"]:
-                        todbdict[pid["pid"]]=pid["value"]
+                        todbdict[pid["pid"].replace(".","")]=pid["value"] #MongoDB cannot store fields with dots in them
                         allchannels[pid["pid"]]["value"] = pid["value"]
                         allchannels[pid["pid"]]["time"] = elm1dict["result"]["timet"]
 
@@ -82,6 +82,7 @@ if __name__ == "__main__":
                     points = []
                     for pid in allchannels:
                         pido = allchannels[pid]
+                        pid = pid.replace(".","")
                         doc[pid] = pido["value"]
                         point = ''.join([pido["desc"].encode("utf-8"),",unit=",pido["unit"].encode("utf-8"),",pid=",pid.encode("utf-8")," value=",str(pido["value"])," ",str(pido["time"])])
                         points.append(point)
