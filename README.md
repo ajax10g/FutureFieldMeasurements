@@ -47,6 +47,42 @@ Monitor and auto-reset modem if it hangs:
 and if that does not work, restart the modem. This crontab, code and scripts can
 be found in the "modem" directory.
 
+Autocompiling U20_usb_driver on kernel updates using DKMS:
+
+- If Ubuntu automatically updates the kernel after a reboot. The U20_modem driver is not automatically compiled and
+installed unless using DKMS. To use DKMS to automatically compile and install the driver as a kernel module, do the following steps:
+- 1. Create a directory `/usr/src/option-1.0`
+- 2. Create a subdirectory `/usr/src/option-1.0/src`and copy in the `option.c`, `usb_wwan.c` and `qserial.c` from <a href="https://github.com/plopp/FutureFieldMeasurements/tree/master/modem/U20_usb_driver_for_ubuntu14.04">here</a>.
+- 3. Create a `dkms.conf`file under `/usr/src/option-1.0`
+- 4. Edit the `dkms.conf`file and insert the following content:
+```
+AKE="make -C src/"
+CLEAN="make -C src/ clean"
+BUILT_MODULE_NAME[0]=option
+BUILT_MODULE_NAME[1]=usb_wwan
+BUILT_MODULE_NAME[2]=qcserial
+BUILT_MODULE_LOCATION[0]=src/
+BUILT_MODULE_LOCATION[1]=src/
+BUILT_MODULE_LOCATION[2]=src/
+PACKAGE_NAME=option
+PACKAGE_VERSION=1.0
+REMAKE_INITRD=yes
+DEST_MODULE_LOCATION[0]=/kernel/drivers/usb/serial/
+DEST_MODULE_LOCATION[1]=/kernel/drivers/usb/serial/
+DEST_MODULE_LOCATION[2]=/kernel/drivers/usb/serial/
+AUTOINSTALL=yes
+```
+- 5. Test building the module: `#dkms build -m option -v 1.0`
+- 6. Test installing the module: `#dkms install -m option -v 1.0`
+- 7. Test up-ing the ppp0 connection: `#ifdown ppp0 && ifup ppp0`
+- 8. Check `#ifconfig ppp0`to see that everything works.
+- 9. Edit `/etc/network/interfaces` and add a pre-up stanza to modprobe the option kernel module when it is upped:
+```
+auto ppp0
+iface ppp0 inet wvdial
+    pre-up modprobe option
+```
+
 Setting the NTP-servers:
 
 - Install ntp daemon: ```#apt-get install ntp```
@@ -211,3 +247,4 @@ Installing meteor and running the app from node
 ```
 TODO
 ```
+
