@@ -11,6 +11,14 @@ fi
 
 service mosquitto stop
 
+echo 'Copying wvdial.conf to /etc/wvdial.conf'
+cp modem/wvdial.conf /etc/wvdial.conf
+
+echo 'Copying option U20-usb-modem-driver to kernel source dir /usr/src/option-1.0'
+mkdir /usr/src/option-1.0
+cp -r modem/src /usr/src/option-1.0/src
+cp modem/dkms.conf /usr/src/option-1.0/dkms.conf
+
 #Copying upstart scripts
 echo "Copying upstart scripts to /etc/init."
 dir="upstart"
