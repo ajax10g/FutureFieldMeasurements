@@ -59,10 +59,11 @@ if __name__ == "__main__":
                     allchannels = {}
                     for channel in all["result"]["points"]:
                         allpids.append(channel["pid"])
-                        allchannels[channel["pid"]]={
+                        allchannels[channel["pid"].replace(".","")]={
                             "unit":channel["attr"],
                             "desc":channel["desc"]
                         }
+                    print allchannels
 
                     elm1 = sendRPC(url, user, passw, method="pdb.getvalue",params=allpids)
                     elm1dict = json.loads(elm1)
@@ -72,11 +73,11 @@ if __name__ == "__main__":
                     todbdict = {}
                     for pid in elm1dict["result"]["points"]:
                         todbdict[pid["pid"].replace(".","")]=pid["value"] #MongoDB cannot store fields with dots in them
-                        allchannels[pid["pid"]]["value"] = pid["value"]
-                        allchannels[pid["pid"]]["time"] = elm1dict["result"]["timet"]
+                        allchannels[pid["pid"].replace(".","")]["value"] = pid["value"]
+                        allchannels[pid["pid"].replace(".","")]["time"] = elm1dict["result"]["timet"]
 
                     todbdict["time"]=elm1dict["result"]["timet"]
-
+		    #print json.dumps(allchannels)
                     #print todbdict
 
                     points = []
@@ -90,7 +91,7 @@ if __name__ == "__main__":
 
                     #print points
 
-                    mqttc.publish("/mbus/data", json.dumps(todbdict), retain=True)
+                    mqttc.publish("/mbus/data", json.dumps(allchannels), retain=True)
                     #print "Data sent to mqtt."
         except KeyError as ke:
             print "Key error",ke
