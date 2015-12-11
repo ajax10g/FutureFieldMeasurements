@@ -56,7 +56,7 @@ cp -r $dir /etc/futurefieldmeasurements
 dir="meteor"
 rm -r /opt/future-field-meteor
 cp -r $dir /opt/future-field-meteor
-(cd /opt/future-field-meteor/programs/server && /usr/bin/npm install)
+(cd /opt/future-field-meteor/app/programs/server && /usr/bin/npm install)
 chown -R meteoruser:meteor /opt/future-field-meteor/
 chmod -R 770 /opt/future-field-meteor
 
