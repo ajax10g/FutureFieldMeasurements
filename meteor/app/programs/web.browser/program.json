@@ -2,64 +2,802 @@
   "format": "web-program-pre1",
   "manifest": [
     {
-      "path": "b02331b1d11eadba5ab9d874afe86ae87f6d9aa0.js",
+      "path": "b5235c0a0d9766274b9981d5dfbdb1ecd15424ee.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/b02331b1d11eadba5ab9d874afe86ae87f6d9aa0.js?meteor_js_resource=true",
-      "size": 416679,
-      "hash": "b02331b1d11eadba5ab9d874afe86ae87f6d9aa0"
+      "url": "/b5235c0a0d9766274b9981d5dfbdb1ecd15424ee.js?meteor_js_resource=true",
+      "size": 1041386,
+      "hash": "b5235c0a0d9766274b9981d5dfbdb1ecd15424ee"
     },
     {
-      "path": "932420ff7fbd1edcd66ac47be94a3595c19cddc0.css",
+      "path": "5e43b338ce9cc2413ab6693f3b2c322b6d3b684a.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/932420ff7fbd1edcd66ac47be94a3595c19cddc0.css?meteor_css_resource=true",
-      "size": 102728,
-      "hash": "932420ff7fbd1edcd66ac47be94a3595c19cddc0"
+      "url": "/5e43b338ce9cc2413ab6693f3b2c322b6d3b684a.css?meteor_css_resource=true",
+      "size": 223443,
+      "hash": "5e43b338ce9cc2413ab6693f3b2c322b6d3b684a"
     },
     {
-      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
+      "path": "1b744a661e5fab1846e9e5d8f30167e821f232af.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/1b744a661e5fab1846e9e5d8f30167e821f232af.css?meteor_css_resource=true",
+      "size": 109669,
+      "hash": "1b744a661e5fab1846e9e5d8f30167e821f232af"
+    },
+    {
+      "path": "packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.eot",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.eot",
-      "size": 20290,
-      "hash": "23799c0aa7b60fb1a66993d024f98ac105e74e93"
+      "url": "/packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.eot",
+      "size": 20127,
+      "hash": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3"
     },
     {
-      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
+      "path": "packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.svg",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.ttf",
-      "size": 41236,
-      "hash": "536d2b1b2f3462fb122df1922f2e232546f1b11d"
+      "url": "/packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.svg",
+      "size": 108738,
+      "hash": "de51a8494180a6db074af2dee2383f0a363c5b08"
     },
     {
-      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
+      "path": "packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.ttf",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.svg",
-      "size": 62850,
-      "hash": "ecee9033d9183117d8f59df0e7238e2b24002b24"
+      "url": "/packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+      "size": 45404,
+      "hash": "44bc1850f570972267b169ae18f1cb06b611ffa2"
     },
     {
-      "path": "packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
+      "path": "packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.woff",
       "where": "client",
       "type": "asset",
       "cacheable": false,
-      "url": "/packages/mrt_bootstrap-3/bootstrap-3/fonts/glyphicons-halflings-regular.woff",
-      "size": 23292,
-      "hash": "c6ea7b1a5bb16b160cc9b8a02f6f6371b5ef7b73"
+      "url": "/packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.woff",
+      "size": 23424,
+      "hash": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f"
+    },
+    {
+      "path": "packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/nemo64_bootstrap-data/bootstrap/fonts/glyphicons-halflings-regular.woff2",
+      "size": 18028,
+      "hash": "ca35b697d99cae4d1b60f2d60fcd37771987eb07"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_AMS-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_AMS-Regular.eot",
+      "size": 60728,
+      "hash": "c02b245ff2c086baf6b593cae8e60d753c5e71e3"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_AMS-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_AMS-Regular.ttf",
+      "size": 60540,
+      "hash": "5ffbf8c0b7dfe1c63b3140701641fab2be486452"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_AMS-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_AMS-Regular.woff",
+      "size": 34948,
+      "hash": "1b826a32bb8432cfbe156a7e42d2c4582e1d8c93"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_AMS-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_AMS-Regular.woff2",
+      "size": 28584,
+      "hash": "5cb1dd6e8b167e385d6dc02f3675165a881ee282"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.eot",
+      "size": 12676,
+      "hash": "1de72814ffe5ea41bdb9ee7b46d6c8aafeed5568"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.ttf",
+      "size": 12468,
+      "hash": "ae4745326c5827c77c795036478f93fdedaab322"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.woff",
+      "size": 8372,
+      "hash": "80b232cf3d3623311ac0ef5ef57600365ac6c574"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Bold.woff2",
+      "size": 7312,
+      "hash": "97415b7cf1f01341b2d856c55a24b333589c3f66"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.eot",
+      "size": 12576,
+      "hash": "c7cb3b2605f3e179d17567936066090010efd5d5"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.ttf",
+      "size": 12356,
+      "hash": "bac99a40db9ff54456135be0f8388c86a46cbd76"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.woff",
+      "size": 8296,
+      "hash": "c574de5175277a371c3cdd4226fc2888d60204f6"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Caligraphic-Regular.woff2",
+      "size": 7288,
+      "hash": "a19e9e64e5d0a6bc46babbec8cecfe6dfdefe800"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Bold.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Bold.eot",
+      "size": 26808,
+      "hash": "2738f3de70c2707230e8ee521ebcd7902452bd7e"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Bold.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Bold.ttf",
+      "size": 26616,
+      "hash": "1f271ab2bc720d11b8c4276023035c9d29068721"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Bold.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Bold.woff",
+      "size": 18268,
+      "hash": "e621e99550ea85c674410c34b7c10e1c3b154e41"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Bold.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Bold.woff2",
+      "size": 16104,
+      "hash": "c291a09f6217a3ea7ff8f17dbdbaf4a861905263"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Regular.eot",
+      "size": 26200,
+      "hash": "8657cc0be8834697c67e9b36361d2fdb13ad0e52"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Regular.ttf",
+      "size": 25996,
+      "hash": "bc64b154185c399d9ac5e4a4929dd74457719282"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Regular.woff",
+      "size": 17784,
+      "hash": "ee73ccb96a036af6afc027005266a3e95bdc63eb"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Fraktur-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Fraktur-Regular.woff2",
+      "size": 15508,
+      "hash": "b01cb02d04e12cc718c318b615f0f17536739ac3"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Bold.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Bold.eot",
+      "size": 49128,
+      "hash": "19d3f7a6ef8aeafce387f4dbc1a318c29665a93f"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Bold.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Bold.ttf",
+      "size": 48948,
+      "hash": "d8c6ea1d2ef8c2c6b9c0c952c4dd92b738454d4a"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Bold.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Bold.woff",
+      "size": 28936,
+      "hash": "b62e0626b6ca9d3838131a32d90722808669bd8a"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Bold.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Bold.woff2",
+      "size": 23816,
+      "hash": "253a3cb9be155c7afcd5ca408f5d7c3273e57af8"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Italic.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Italic.eot",
+      "size": 29156,
+      "hash": "16dc3dca0da8e6f2506ee94e4afcb4cc85c34662"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Italic.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Italic.ttf",
+      "size": 28968,
+      "hash": "1d51a9cc801cb11a4e51f29e4c8505e49176462b"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Italic.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Italic.woff",
+      "size": 17576,
+      "hash": "d1d0bb200fb9508967998c3c8585acc60361249f"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Italic.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Italic.woff2",
+      "size": 14840,
+      "hash": "bbd5c5a037c5e0e3260120488c5e2fb1b86b165a"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Regular.eot",
+      "size": 50048,
+      "hash": "a7ff175d2152a024c4e522241f23878a3affc4b8"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Regular.ttf",
+      "size": 49856,
+      "hash": "bab4fd1b8b4d570cfc918cb9eb915d78bf01b7d5"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Regular.woff",
+      "size": 28916,
+      "hash": "2fdd2fad4371b285985718df0326b3fe4898a183"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Main-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Main-Regular.woff2",
+      "size": 23916,
+      "hash": "eec61e5fc4559fa320b6391d01ba4daa828e1acc"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-BoldItalic.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-BoldItalic.eot",
+      "size": 26646,
+      "hash": "881e94951ba20722c2bce057e6cc442ac9a06fbc"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-BoldItalic.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-BoldItalic.ttf",
+      "size": 26440,
+      "hash": "2b3afa42de6d06d403414d5d6df185bace60d5fe"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-BoldItalic.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-BoldItalic.woff",
+      "size": 16324,
+      "hash": "28078e1ef8b53036fcde8faf499285ca092bd13b"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-BoldItalic.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-BoldItalic.woff2",
+      "size": 13988,
+      "hash": "08479acdebfaaf9ca556a2f6cc76b271a85be996"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Italic.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Italic.eot",
+      "size": 26940,
+      "hash": "d8214ba407730c0a00e74f5387fbf910c074be87"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Italic.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Italic.ttf",
+      "size": 26752,
+      "hash": "ded6487be393271e13d95cffe18005f8a1c7f518"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Italic.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Italic.woff",
+      "size": 16580,
+      "hash": "c07d5e046dd216f89bf87b555b02e96ffb08f290"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Italic.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Italic.woff2",
+      "size": 14104,
+      "hash": "a78b874477923ac28bc147e15d5c0bae1ae78e2c"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Regular.eot",
+      "size": 26876,
+      "hash": "fdcedd75295ae2608c48a3389c8f67cf67d8c58b"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Regular.ttf",
+      "size": 26684,
+      "hash": "fa154bd3f57bbb0d15fe1def8ca1a050005b8d80"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Regular.woff",
+      "size": 16516,
+      "hash": "eae7419c93bb3d57ff731c62c6699c9e8599402c"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Math-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Math-Regular.woff2",
+      "size": 14124,
+      "hash": "353276ba81deda71fca93886d0c8106f0b856184"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Bold.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Bold.eot",
+      "size": 22216,
+      "hash": "3e353a6bdd10af6a6ef69e3fb52dd6b3dd732b6d"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Bold.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Bold.ttf",
+      "size": 22016,
+      "hash": "09194b6592d6f2b32d53fcc0b98ef2603acd520d"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Bold.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Bold.woff",
+      "size": 13580,
+      "hash": "d243a7dda14e194fe89056c2fc0b9f56057200aa"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Bold.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Bold.woff2",
+      "size": 11084,
+      "hash": "b44847dcdf6d148ccb4ecf017dadf421164b8ac8"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Italic.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Italic.eot",
+      "size": 19876,
+      "hash": "cee6ae6ae5d67fee2df53b8e1525df54f6249ccd"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Italic.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Italic.ttf",
+      "size": 19668,
+      "hash": "9749f4d9150077b36c213ce2b7ce36142330bf37"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Italic.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Italic.woff",
+      "size": 13140,
+      "hash": "e23a0ecf279c536b47a283af7b2d9dadb251f01d"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Italic.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Italic.woff2",
+      "size": 10872,
+      "hash": "6caefa06e5b2d3ce7766964f1498c4021406eb04"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Regular.eot",
+      "size": 16972,
+      "hash": "c5cb3a1dd17eed6aa11ade542efa321ae3f1a5a5"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Regular.ttf",
+      "size": 16760,
+      "hash": "f96f0172e1b441a4924d8f8b25dfe6101fdf9bb1"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Regular.woff",
+      "size": 11312,
+      "hash": "4cd0f9a34e2f3852e2904a3378e218aff8ef5ee8"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_SansSerif-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_SansSerif-Regular.woff2",
+      "size": 9220,
+      "hash": "34702a7fa0c8fd7219fec3ddf1bf3ba6cdf5cf4d"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Script-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Script-Regular.eot",
+      "size": 14864,
+      "hash": "eef9156a165bf11d53f44d4974c76aa0a11ec286"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Script-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Script-Regular.ttf",
+      "size": 14664,
+      "hash": "a720c1f9365bdd4bd065b1bec23802aabef9ca25"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Script-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Script-Regular.woff",
+      "size": 9796,
+      "hash": "9c377a1228c326bc2c2deb7fe905022da8e317c1"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Script-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Script-Regular.woff2",
+      "size": 8700,
+      "hash": "c3d4e86170550f427a95ad395bc085a2acbd9ea4"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size1-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size1-Regular.eot",
+      "size": 10580,
+      "hash": "4a7bebec9181db86b5b1a91cefefa36e7e256aa1"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size1-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size1-Regular.ttf",
+      "size": 10384,
+      "hash": "327191e2d006e528fead0c367cd0fd91d611624b"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size1-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size1-Regular.woff",
+      "size": 5724,
+      "hash": "ac4ad9395eba9d173d2384ba7892754a9733574c"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size1-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size1-Regular.woff2",
+      "size": 4632,
+      "hash": "c0afabda5552a54c0f0cebfd6cd963fb5df54445"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size2-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size2-Regular.eot",
+      "size": 9876,
+      "hash": "be4730c0b948dc07337fa09b5549c2c3e5f70f00"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size2-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size2-Regular.ttf",
+      "size": 9680,
+      "hash": "e6da5e15b5399a8d7064338bafb40201eb3c901a"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size2-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size2-Regular.woff",
+      "size": 5464,
+      "hash": "67a68ebecfdf8c1e9fc65a340bc9581a0c2b8a6c"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size2-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size2-Regular.woff2",
+      "size": 4396,
+      "hash": "ff097a3ad0d80b15aac02f46126579cd7a9ee280"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size3-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size3-Regular.eot",
+      "size": 5920,
+      "hash": "a9f45083f27b2371f4a17e944265a1974800ad44"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size3-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size3-Regular.ttf",
+      "size": 5724,
+      "hash": "15b8ee49775f6ac74d8c4634e08fbfb920dc097b"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size3-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size3-Regular.woff",
+      "size": 3632,
+      "hash": "bb06c519f7cc1b31460a91f76e627fcb9dcac401"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size3-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size3-Regular.woff2",
+      "size": 2812,
+      "hash": "00c66b099def5f19f29cd16de437b7b47098ec89"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size4-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size4-Regular.eot",
+      "size": 8684,
+      "hash": "53019fc058537810e91b0530c18e54caac840644"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size4-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size4-Regular.ttf",
+      "size": 8488,
+      "hash": "2a0517c5a7e3e61e552e741cfa4fc3c349792fc3"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size4-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size4-Regular.woff",
+      "size": 5268,
+      "hash": "693c5e7ee96f8882ff95422ad72891122d332767"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Size4-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Size4-Regular.woff2",
+      "size": 4032,
+      "hash": "5d5e3f751ff2eeb2de04e80e62c739c06f014e35"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Typewriter-Regular.eot",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Typewriter-Regular.eot",
+      "size": 24984,
+      "hash": "82769f73d2c2da42faac13425e642d24b1573e3f"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Typewriter-Regular.ttf",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Typewriter-Regular.ttf",
+      "size": 24768,
+      "hash": "6407e07b9bced8034c92d874cef482f2957b8b1d"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Typewriter-Regular.woff",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Typewriter-Regular.woff",
+      "size": 14976,
+      "hash": "6929e51eef6d5a59b6dbf585a4d65754183640ba"
+    },
+    {
+      "path": "packages/simple_katex/fonts/KaTeX_Typewriter-Regular.woff2",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/packages/simple_katex/fonts/KaTeX_Typewriter-Regular.woff2",
+      "size": 12272,
+      "hash": "7770551a8d5b1eb30612a9413169c910b400cfa5"
     },
     {
       "path": "head.html",
       "where": "internal",
       "type": "head",
-      "hash": "6547aa49c80c5f093f0dc6e2722e6a35afc2fcf1"
+      "hash": "ce44f49a9d6df8db641fc6be733d3ebd349957fa"
     }
   ]
 }

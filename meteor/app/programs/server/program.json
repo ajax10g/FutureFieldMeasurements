@@ -110,6 +110,14 @@
       "path": "packages/ddp-client.js"
     },
     {
+      "sourceMap": "packages/rate-limit.js.map",
+      "path": "packages/rate-limit.js"
+    },
+    {
+      "sourceMap": "packages/ddp-rate-limiter.js.map",
+      "path": "packages/ddp-rate-limiter.js"
+    },
+    {
       "node_modules": "npm/logging/node_modules",
       "sourceMap": "packages/logging.js.map",
       "path": "packages/logging.js"
@@ -222,13 +230,144 @@
       "path": "packages/standard-minifiers.js"
     },
     {
+      "sourceMap": "packages/standard-app-packages.js.map",
+      "path": "packages/standard-app-packages.js"
+    },
+    {
+      "sourceMap": "packages/accounts-base.js.map",
+      "path": "packages/accounts-base.js"
+    },
+    {
+      "sourceMap": "packages/url.js.map",
+      "path": "packages/url.js"
+    },
+    {
+      "node_modules": "npm/http/node_modules",
+      "sourceMap": "packages/http.js.map",
+      "path": "packages/http.js"
+    },
+    {
+      "node_modules": "npm/email/node_modules",
+      "sourceMap": "packages/email.js.map",
+      "path": "packages/email.js"
+    },
+    {
+      "sourceMap": "packages/spiderable.js.map",
+      "path": "packages/spiderable.js",
+      "assets": {
+        "phantom_script.js": "assets/packages/spiderable/phantom_script.js"
+      }
+    },
+    {
+      "sourceMap": "packages/templating.js.map",
+      "path": "packages/templating.js"
+    },
+    {
+      "sourceMap": "packages/iron_core.js.map",
+      "path": "packages/iron_core.js"
+    },
+    {
+      "sourceMap": "packages/iron_dynamic-template.js.map",
+      "path": "packages/iron_dynamic-template.js"
+    },
+    {
+      "sourceMap": "packages/iron_layout.js.map",
+      "path": "packages/iron_layout.js"
+    },
+    {
+      "sourceMap": "packages/iron_url.js.map",
+      "path": "packages/iron_url.js"
+    },
+    {
+      "sourceMap": "packages/iron_middleware-stack.js.map",
+      "path": "packages/iron_middleware-stack.js"
+    },
+    {
+      "sourceMap": "packages/iron_location.js.map",
+      "path": "packages/iron_location.js"
+    },
+    {
+      "sourceMap": "packages/reactive-dict.js.map",
+      "path": "packages/reactive-dict.js"
+    },
+    {
+      "sourceMap": "packages/iron_controller.js.map",
+      "path": "packages/iron_controller.js"
+    },
+    {
+      "node_modules": "npm/iron_router/node_modules",
+      "sourceMap": "packages/iron_router.js.map",
+      "path": "packages/iron_router.js"
+    },
+    {
+      "sourceMap": "packages/natestrauser_font-awesome.js.map",
+      "path": "packages/natestrauser_font-awesome.js"
+    },
+    {
+      "sourceMap": "packages/matb33_collection-hooks.js.map",
+      "path": "packages/matb33_collection-hooks.js"
+    },
+    {
+      "sourceMap": "packages/perak_user-roles.js.map",
+      "path": "packages/perak_user-roles.js"
+    },
+    {
+      "sourceMap": "packages/copleykj_livestamp.js.map",
+      "path": "packages/copleykj_livestamp.js"
+    },
+    {
+      "sourceMap": "packages/less.js.map",
+      "path": "packages/less.js"
+    },
+    {
+      "sourceMap": "packages/nemo64_bootstrap.js.map",
+      "path": "packages/nemo64_bootstrap.js"
+    },
+    {
+      "node_modules": "npm/npm-bcrypt/node_modules",
+      "sourceMap": "packages/npm-bcrypt.js.map",
+      "path": "packages/npm-bcrypt.js"
+    },
+    {
+      "sourceMap": "packages/sha.js.map",
+      "path": "packages/sha.js"
+    },
+    {
+      "sourceMap": "packages/srp.js.map",
+      "path": "packages/srp.js"
+    },
+    {
+      "sourceMap": "packages/accounts-password.js.map",
+      "path": "packages/accounts-password.js"
+    },
+    {
+      "sourceMap": "packages/mizzao_bootboxjs.js.map",
+      "path": "packages/mizzao_bootboxjs.js"
+    },
+    {
+      "sourceMap": "packages/mrt_moment.js.map",
+      "path": "packages/mrt_moment.js"
+    },
+    {
+      "sourceMap": "packages/rajit_bootstrap3-datepicker.js.map",
+      "path": "packages/rajit_bootstrap3-datepicker.js"
+    },
+    {
       "node_modules": "npm/perak_mqtt-collection/node_modules",
       "sourceMap": "packages/perak_mqtt-collection.js.map",
       "path": "packages/perak_mqtt-collection.js"
     },
     {
-      "sourceMap": "packages/mrt_bootstrap-3.js.map",
-      "path": "packages/mrt_bootstrap-3.js"
+      "sourceMap": "packages/liyu_sprintfjs.js.map",
+      "path": "packages/liyu_sprintfjs.js"
+    },
+    {
+      "sourceMap": "packages/simple_katex.js.map",
+      "path": "packages/simple_katex.js",
+      "assets": {
+        "katex.min.css": "assets/packages/simple_katex/katex.min.css",
+        "fonts-override.css": "assets/packages/simple_katex/fonts-override.css"
+      }
     },
     {
       "sourceMap": "packages/livedata.js.map",
@@ -243,23 +382,143 @@
       "path": "packages/launch-screen.js"
     },
     {
-      "sourceMap": "packages/templating.js.map",
-      "path": "packages/templating.js"
+      "sourceMap": "packages/reload.js.map",
+      "path": "packages/reload.js"
     },
     {
       "sourceMap": "packages/autoupdate.js.map",
       "path": "packages/autoupdate.js"
     },
     {
-      "sourceMap": "packages/reload.js.map",
-      "path": "packages/reload.js"
+      "sourceMap": "packages/meteor-platform.js.map",
+      "path": "packages/meteor-platform.js"
     },
     {
       "path": "packages/global-imports.js"
     },
     {
-      "sourceMap": "app/future-field-meteor.js.map",
-      "path": "app/future-field-meteor.js"
+      "sourceMap": "app/lib/number_utils.js.map",
+      "path": "app/lib/number_utils.js"
+    },
+    {
+      "sourceMap": "app/lib/object_utils.js.map",
+      "path": "app/lib/object_utils.js"
+    },
+    {
+      "sourceMap": "app/lib/string_utils.js.map",
+      "path": "app/lib/string_utils.js"
+    },
+    {
+      "sourceMap": "app/both/collections/ethercat.js.map",
+      "path": "app/both/collections/ethercat.js"
+    },
+    {
+      "sourceMap": "app/both/collections/ethercatunits.js.map",
+      "path": "app/both/collections/ethercatunits.js"
+    },
+    {
+      "sourceMap": "app/both/collections/gpio.js.map",
+      "path": "app/both/collections/gpio.js"
+    },
+    {
+      "sourceMap": "app/both/collections/mbus.js.map",
+      "path": "app/both/collections/mbus.js"
+    },
+    {
+      "sourceMap": "app/both/collections/modbusrtu.js.map",
+      "path": "app/both/collections/modbusrtu.js"
+    },
+    {
+      "sourceMap": "app/both/collections/modbustcp.js.map",
+      "path": "app/both/collections/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/both/collections/onewire.js.map",
+      "path": "app/both/collections/onewire.js"
+    },
+    {
+      "sourceMap": "app/both/collections/signals.js.map",
+      "path": "app/both/collections/signals.js"
+    },
+    {
+      "sourceMap": "app/both/joins/joins.js.map",
+      "path": "app/both/joins/joins.js"
+    },
+    {
+      "sourceMap": "app/server/collections/ethercat.js.map",
+      "path": "app/server/collections/ethercat.js"
+    },
+    {
+      "sourceMap": "app/server/collections/ethercatunits.js.map",
+      "path": "app/server/collections/ethercatunits.js"
+    },
+    {
+      "sourceMap": "app/server/collections/gpio.js.map",
+      "path": "app/server/collections/gpio.js"
+    },
+    {
+      "sourceMap": "app/server/collections/mbus.js.map",
+      "path": "app/server/collections/mbus.js"
+    },
+    {
+      "sourceMap": "app/server/collections/modbusrtu.js.map",
+      "path": "app/server/collections/modbusrtu.js"
+    },
+    {
+      "sourceMap": "app/server/collections/modbustcp.js.map",
+      "path": "app/server/collections/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/server/collections/onewire.js.map",
+      "path": "app/server/collections/onewire.js"
+    },
+    {
+      "sourceMap": "app/server/collections/signals.js.map",
+      "path": "app/server/collections/signals.js"
+    },
+    {
+      "sourceMap": "app/server/controllers/router.js.map",
+      "path": "app/server/controllers/router.js"
+    },
+    {
+      "sourceMap": "app/server/publish/ethercat.js.map",
+      "path": "app/server/publish/ethercat.js"
+    },
+    {
+      "sourceMap": "app/server/publish/ethercatunits.js.map",
+      "path": "app/server/publish/ethercatunits.js"
+    },
+    {
+      "sourceMap": "app/server/publish/gpio.js.map",
+      "path": "app/server/publish/gpio.js"
+    },
+    {
+      "sourceMap": "app/server/publish/mbus.js.map",
+      "path": "app/server/publish/mbus.js"
+    },
+    {
+      "sourceMap": "app/server/publish/modbusrtu.js.map",
+      "path": "app/server/publish/modbusrtu.js"
+    },
+    {
+      "sourceMap": "app/server/publish/modbustcp.js.map",
+      "path": "app/server/publish/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/server/publish/onewire.js.map",
+      "path": "app/server/publish/onewire.js"
+    },
+    {
+      "sourceMap": "app/server/publish/signals.js.map",
+      "path": "app/server/publish/signals.js"
+    },
+    {
+      "sourceMap": "app/server/server.js.map",
+      "path": "app/server/server.js"
+    },
+    {
+      "sourceMap": "packages/service-configuration.js.map",
+      "path": "packages/service-configuration.js"
     }
   ]
 }

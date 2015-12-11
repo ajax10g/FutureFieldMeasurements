@@ -1,0 +1,1 @@
+{"version":3,"sources":["meteor://💻app/server/publish/signals.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,SAAS,EAAE,YAAY;AAClC,WAAO,OAAO,CAAC,IAAI,EAAE,CAAC;CACzB,CAAC,CAAC,sE","file":"/server/publish/signals.js","sourcesContent":["Meteor.publish(\"signals\", function () {\n    return Signals.find();\n});"]}

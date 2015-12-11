@@ -1,0 +1,1 @@
+{"version":3,"sources":["meteor://💻app/server/publish/ethercat.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,UAAU,EAAE,YAAY;AACnC,WAAO,QAAQ,CAAC,IAAI,EAAE,CAAC;CAC1B,CAAC,CAAC,sE","file":"/server/publish/ethercat.js","sourcesContent":["Meteor.publish(\"ethercat\", function () {\n    return Ethercat.find();\n});"]}

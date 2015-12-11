@@ -1,0 +1,1 @@
+{"version":3,"sources":["meteor://💻app/server/controllers/router.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,GAAG,CAAC,YAAY,EAEtB,CAAC,CAAC,gD","file":"/server/controllers/router.js","sourcesContent":["Router.map(function () {\n\n});\n"]}

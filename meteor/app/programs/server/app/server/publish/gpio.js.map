@@ -1,0 +1,1 @@
+{"version":3,"sources":["meteor://💻app/server/publish/gpio.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,MAAM,EAAE,YAAY;AAC/B,WAAO,IAAI,CAAC,IAAI,EAAE,CAAC;CACtB,CAAC,CAAC,sE","file":"/server/publish/gpio.js","sourcesContent":["Meteor.publish(\"gpio\", function () {\n    return Gpio.find();\n});"]}
