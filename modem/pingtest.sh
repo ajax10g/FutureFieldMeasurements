@@ -22,5 +22,5 @@ then
 	echo "ok"
 else
 	echo "nok - resetting modem"
-        sh resetmodem.sh
+        /bin/sh /etc/futurefieldmeasurements/modem/resetmodem.sh
 fi

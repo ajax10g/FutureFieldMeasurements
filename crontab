@@ -20,4 +20,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-* 0 * * * /bin/sh pingtest.sh >/dev/null 2>&1
+* * * * * /bin/sh /etc/futurefieldmeasurements/modem/pingtest.sh >/dev/null 2>&1

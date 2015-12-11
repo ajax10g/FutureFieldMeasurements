@@ -28,6 +28,7 @@ cp $dir/*.conf /etc/init
 echo "Copying modem scripts to /etc/futurefieldmeasurements."
 dir="modem"
 cp -r $dir /etc/futurefieldmeasurements
+gcc /etc/futurefieldmeasurements/$dir/usbreset.c -o /etc/futurefieldmeasurements/$dir/usbreset
 
 #Get buses
 echo "Copying buses scripts to /etc/futurefieldmeasurements."
