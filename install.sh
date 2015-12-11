@@ -28,6 +28,8 @@ cp $dir/*.conf /etc/init
 echo "Copying modem scripts to /etc/futurefieldmeasurements."
 dir="modem"
 cp -r $dir /etc/futurefieldmeasurements
+
+echo "Compiling usb-reset program."
 gcc /etc/futurefieldmeasurements/$dir/usbreset.c -o /etc/futurefieldmeasurements/$dir/usbreset
 
 #Get buses
@@ -36,19 +38,27 @@ dir="1-wire"
 cp -r  $dir /etc/futurefieldmeasurements
 
 dir="ethercat"
-cp -r  $dir /etc/futurefieldmeasurements
+cp -r $dir /etc/futurefieldmeasurements
 
 dir="mbus"
-cp -r  $dir /etc/futurefieldmeasurements
+cp -r $dir /etc/futurefieldmeasurements
 
 dir="modbus-rtu"
-cp -r  $dir /etc/futurefieldmeasurements
+cp -r $dir /etc/futurefieldmeasurements
 
 dir="modbus-tcp"
-cp -r  $dir /etc/futurefieldmeasurements
+cp -r $dir /etc/futurefieldmeasurements
 
 dir="dio"
-cp -r  $dir /etc/futurefieldmeasurements
+cp -r $dir /etc/futurefieldmeasurements
+
+#Copy meteor project to /opt/future-field-meteor/app
+dir="meteor"
+rm -r /opt/future-field-meteor
+cp -r $dir /opt/future-field-meteor
+(cd /opt/future-field-meteor/programs/server && /usr/bin/npm install)
+chown -R meteoruser:meteor /opt/future-field-meteor/
+chmod -R 770 /opt/future-field-meteor
 
 echo "Now restarting mosquitto and thus restarting all bus jobs."
 dir="mosquitto"
