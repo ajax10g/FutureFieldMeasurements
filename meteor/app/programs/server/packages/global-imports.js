@@ -25,6 +25,7 @@ check = Package.check.check;
 Match = Package.check.Match;
 mqtt = Package['perak:mqtt-collection'].mqtt;
 sprintf = Package['liyu:sprintfjs'].sprintf;
+Kadira = Package['meteorhacks:kadira'].Kadira;
 Meteor = Package.meteor.Meteor;
 WebApp = Package.webapp.WebApp;
 main = Package.webapp.main;

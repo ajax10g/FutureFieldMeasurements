@@ -40,36 +40,37 @@ OneWire.before.remove(function (userId, doc) {});                      // 33
 OneWire.after.insert(function (userId, doc) {});                       // 37
                                                                        //
 OneWire.after.update(function (userId, doc, fieldNames, modifier, options) {
-	var message = doc.message;                                            // 42
-	var sensorArr = [];                                                   // 43
-	var timestamp = new Date(message["time"]);                            // 44
-	for (var key in babelHelpers.sanitizeForInObject(message)) {          // 45
-		if (key !== "time") {                                                // 46
-			var sensorid = key;                                                 // 47
+	console.log("OneWire - afterUpdate");                                 // 42
+	var message = doc.message;                                            // 43
+	var sensorArr = [];                                                   // 44
+	var timestamp = new Date(message["time"]);                            // 45
+	for (var key in babelHelpers.sanitizeForInObject(message)) {          // 46
+		if (key !== "time") {                                                // 47
+			var sensorid = key;                                                 // 48
 			for (var valuekey in babelHelpers.sanitizeForInObject(message[key])) {
-				var tempObj = {};                                                  // 49
-				tempObj["signal"] = sensorid + "." + valuekey;                     // 50
-				tempObj["value"] = message[key][valuekey];                         // 51
-				tempObj["timestamp"] = timestamp;                                  // 52
-				sensorArr.push(tempObj);                                           // 53
+				var tempObj = {};                                                  // 50
+				tempObj["signal"] = sensorid + "." + valuekey;                     // 51
+				tempObj["value"] = message[key][valuekey];                         // 52
+				tempObj["timestamp"] = timestamp;                                  // 53
+				sensorArr.push(tempObj);                                           // 54
 			}                                                                   //
 		}                                                                    //
 	}                                                                     //
                                                                        //
-	sensorArr.forEach(function (sensor, i) {                              // 58
-		var unit = "";                                                       // 59
-		if (sensor.signal.indexOf("tempC") > -1) {                           // 60
-			unit = "°C";                                                        // 61
+	sensorArr.forEach(function (sensor, i) {                              // 59
+		var unit = "";                                                       // 60
+		if (sensor.signal.indexOf("tempC") > -1) {                           // 61
+			unit = "°C";                                                        // 62
 		} else if (sensor.signal.indexOf("counter") > -1) {                  //
-			unit = "#";                                                         // 64
+			unit = "#";                                                         // 65
 		} else if (sensor.signal.indexOf("hum") > -1) {                      //
-			unit = "%RH";                                                       // 67
+			unit = "%RH";                                                       // 68
 		}                                                                    //
-		var searchSignal = Signals.findOne({ "signal": sensor.signal });     // 69
-		if (searchSignal !== undefined) {                                    // 70
-			var offsetA = searchSignal.offsetA;                                 // 71
-			var offsetB = searchSignal.offsetB;                                 // 72
-			var scale = searchSignal.scale;                                     // 73
+		var searchSignal = Signals.findOne({ "signal": sensor.signal });     // 70
+		if (searchSignal !== undefined) {                                    // 71
+			var offsetA = searchSignal.offsetA;                                 // 72
+			var offsetB = searchSignal.offsetB;                                 // 73
+			var scale = searchSignal.scale;                                     // 74
 			Signals.upsert({ "signal": sensor.signal }, { $set: { value: scale * (sensor.value + offsetA) + offsetB, raw: sensor.value, timestamp: sensor.timestamp } });
 		} else {                                                             //
 			Signals.upsert({ "signal": sensor.signal }, { $set: { name: null, bus: "onewire", value: sensor.value, raw: sensor.value, timestamp: sensor.timestamp, unit: unit, offsetA: 0.0, offsetB: 0.0, scale: 1.0, hidden: false } });
@@ -77,7 +78,7 @@ OneWire.after.update(function (userId, doc, fieldNames, modifier, options) {
 	});                                                                   //
 });                                                                    //
                                                                        //
-OneWire.after.remove(function (userId, doc) {});                       // 82
+OneWire.after.remove(function (userId, doc) {});                       // 83
 /////////////////////////////////////////////////////////////////////////
 
 }).call(this);

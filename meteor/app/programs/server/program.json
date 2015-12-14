@@ -370,8 +370,21 @@
       }
     },
     {
+      "sourceMap": "packages/meteorhacks_meteorx.js.map",
+      "path": "packages/meteorhacks_meteorx.js"
+    },
+    {
       "sourceMap": "packages/livedata.js.map",
       "path": "packages/livedata.js"
+    },
+    {
+      "sourceMap": "packages/mongo-livedata.js.map",
+      "path": "packages/mongo-livedata.js"
+    },
+    {
+      "node_modules": "npm/meteorhacks_kadira/node_modules",
+      "sourceMap": "packages/meteorhacks_kadira.js.map",
+      "path": "packages/meteorhacks_kadira.js"
     },
     {
       "sourceMap": "packages/hot-code-push.js.map",
@@ -429,8 +442,20 @@
       "path": "app/both/collections/modbusrtu.js"
     },
     {
+      "sourceMap": "app/both/collections/modbusrturead.js.map",
+      "path": "app/both/collections/modbusrturead.js"
+    },
+    {
       "sourceMap": "app/both/collections/modbustcp.js.map",
       "path": "app/both/collections/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/both/collections/modbustcpread.js.map",
+      "path": "app/both/collections/modbustcpread.js"
+    },
+    {
+      "sourceMap": "app/both/collections/modbustcpreadcommand.js.map",
+      "path": "app/both/collections/modbustcpreadcommand.js"
     },
     {
       "sourceMap": "app/both/collections/onewire.js.map",
@@ -465,8 +490,20 @@
       "path": "app/server/collections/modbusrtu.js"
     },
     {
+      "sourceMap": "app/server/collections/modbusrturead.js.map",
+      "path": "app/server/collections/modbusrturead.js"
+    },
+    {
       "sourceMap": "app/server/collections/modbustcp.js.map",
       "path": "app/server/collections/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/server/collections/modbustcpread.js.map",
+      "path": "app/server/collections/modbustcpread.js"
+    },
+    {
+      "sourceMap": "app/server/collections/modbustcpreadcommand.js.map",
+      "path": "app/server/collections/modbustcpreadcommand.js"
     },
     {
       "sourceMap": "app/server/collections/onewire.js.map",
@@ -501,8 +538,20 @@
       "path": "app/server/publish/modbusrtu.js"
     },
     {
+      "sourceMap": "app/server/publish/modbusrturead.js.map",
+      "path": "app/server/publish/modbusrturead.js"
+    },
+    {
       "sourceMap": "app/server/publish/modbustcp.js.map",
       "path": "app/server/publish/modbustcp.js"
+    },
+    {
+      "sourceMap": "app/server/publish/modbustcpread.js.map",
+      "path": "app/server/publish/modbustcpread.js"
+    },
+    {
+      "sourceMap": "app/server/publish/modbustcpreadcommand.js.map",
+      "path": "app/server/publish/modbustcpreadcommand.js"
     },
     {
       "sourceMap": "app/server/publish/onewire.js.map",
