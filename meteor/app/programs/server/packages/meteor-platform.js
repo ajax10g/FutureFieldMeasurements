@@ -2,6 +2,8 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 var Autoupdate = Package.autoupdate.Autoupdate;
 
 
@@ -11,5 +13,3 @@ if (typeof Package === 'undefined') Package = {};
 Package['meteor-platform'] = {};
 
 })();
-
-//# sourceMappingURL=meteor-platform.js.map

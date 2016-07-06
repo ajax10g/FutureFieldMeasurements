@@ -2,6 +2,8 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
 /* Package-scope variables */
 var moment;
@@ -14,8 +16,8 @@ var moment;
 //                                                                   //
 ///////////////////////////////////////////////////////////////////////
                                                                      //
-(function () {                                                       // 1
-                                                                     // 2
+(function () {
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
 // packages/mrt:moment/lib/moment/moment.js                                                                            //
@@ -2832,16 +2834,16 @@ var moment;
 }).call(this);                                                                                                         // 2808
                                                                                                                        // 2809
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                     // 2819
-}).call(this);                                                       // 2820
-                                                                     // 2821
-                                                                     // 2822
-                                                                     // 2823
-                                                                     // 2824
-                                                                     // 2825
-                                                                     // 2826
-(function () {                                                       // 2827
-                                                                     // 2828
+
+}).call(this);
+
+
+
+
+
+
+(function () {
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
 // packages/mrt:moment/export-moment.js                                                                                //
@@ -2854,9 +2856,9 @@ if (typeof Package !== "undefined") {                                           
 }                                                                                                                      // 4
                                                                                                                        // 5
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                     // 2841
-}).call(this);                                                       // 2842
-                                                                     // 2843
+
+}).call(this);
+
 ///////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -2864,9 +2866,12 @@ if (typeof Package !== "undefined") {                                           
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['mrt:moment'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['mrt:moment'] = {}, {
   moment: moment
-};
+});
 
 })();
 

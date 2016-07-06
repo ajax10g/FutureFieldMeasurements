@@ -2,19 +2,9 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
-(function(){
-
-///////////////////////////////////////////////////////////////////////
-//                                                                   //
-// packages/natestrauser_font-awesome/packages/natestrauser_font-awe //
-//                                                                   //
-///////////////////////////////////////////////////////////////////////
-                                                                     //
-                                                                     // 1
-///////////////////////////////////////////////////////////////////////
-
-}).call(this);
 
 
 /* Exports */
@@ -22,5 +12,3 @@ if (typeof Package === 'undefined') Package = {};
 Package['natestrauser:font-awesome'] = {};
 
 })();
-
-//# sourceMappingURL=natestrauser_font-awesome.js.map

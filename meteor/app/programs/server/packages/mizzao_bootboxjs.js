@@ -2,6 +2,8 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
 (function(){
 
@@ -11,7 +13,6 @@ var Meteor = Package.meteor.Meteor;
 //                                                                   //
 ///////////////////////////////////////////////////////////////////////
                                                                      //
-                                                                     // 1
 ///////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -22,5 +23,3 @@ if (typeof Package === 'undefined') Package = {};
 Package['mizzao:bootboxjs'] = {};
 
 })();
-
-//# sourceMappingURL=mizzao_bootboxjs.js.map

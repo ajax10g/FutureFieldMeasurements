@@ -1,1 +1,0 @@
-{"version":3,"sources":["meteor://💻app/server/publish/onewire.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,SAAS,EAAE,YAAY;AAClC,WAAO,OAAO,CAAC,IAAI,EAAE,CAAC;CACzB,CAAC,CAAC,sE","file":"/server/publish/onewire.js","sourcesContent":["Meteor.publish(\"onewire\", function () {\n    return OneWire.find();\n});"]}

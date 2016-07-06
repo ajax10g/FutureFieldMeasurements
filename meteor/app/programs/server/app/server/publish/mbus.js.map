@@ -1,1 +1,0 @@
-{"version":3,"sources":["meteor://💻app/server/publish/mbus.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,MAAM,EAAE,YAAY;AAC/B,WAAO,IAAI,CAAC,IAAI,EAAE,CAAC;CACtB,CAAC,CAAC,sE","file":"/server/publish/mbus.js","sourcesContent":["Meteor.publish(\"mbus\", function () {\n    return Mbus.find();\n});"]}

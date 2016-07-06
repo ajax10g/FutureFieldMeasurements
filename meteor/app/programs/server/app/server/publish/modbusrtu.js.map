@@ -1,1 +1,0 @@
-{"version":3,"sources":["meteor://💻app/server/publish/modbusrtu.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,WAAW,EAAE,YAAY;AACpC,WAAO,SAAS,CAAC,IAAI,EAAE,CAAC;CAC3B,CAAC,CAAC,sE","file":"/server/publish/modbusrtu.js","sourcesContent":["Meteor.publish(\"modbusrtu\", function () {\n    return ModbusRtu.find();\n});"]}

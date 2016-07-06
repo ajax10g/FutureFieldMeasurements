@@ -2,42 +2,35 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
 /* Package-scope variables */
 var NpmModuleBcrypt;
 
 (function(){
 
-////////////////////////////////////////////////////////////////////////////
-//                                                                        //
-// packages/npm-bcrypt/packages/npm-bcrypt.js                             //
-//                                                                        //
-////////////////////////////////////////////////////////////////////////////
-                                                                          //
-(function () {                                                            // 1
-                                                                          // 2
-///////////////////////////////////////////////////////////////////////   // 3
-//                                                                   //   // 4
-// packages/npm-bcrypt/wrapper.js                                    //   // 5
-//                                                                   //   // 6
-///////////////////////////////////////////////////////////////////////   // 7
-                                                                     //   // 8
-NpmModuleBcrypt = Npm.require('bcrypt');                             // 1
-                                                                     // 2
-///////////////////////////////////////////////////////////////////////   // 11
-                                                                          // 12
-}).call(this);                                                            // 13
-                                                                          // 14
-////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//                                                                   //
+// packages/npm-bcrypt/wrapper.js                                    //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+                                                                     //
+NpmModuleBcrypt = Npm.require('bcrypt');
+
+///////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['npm-bcrypt'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['npm-bcrypt'] = {}, {
   NpmModuleBcrypt: NpmModuleBcrypt
-};
+});
 
 })();
 

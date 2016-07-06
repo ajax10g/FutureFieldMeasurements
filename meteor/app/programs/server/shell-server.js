@@ -6,14 +6,13 @@ var net = require("net");
 var tty = require("tty");
 var vm = require("vm");
 var _ = require("underscore");
-var INFO_FILE_MODE = 0600; // Only the owner can read or write.
+var INFO_FILE_MODE = parseInt("600", 8); // Only the owner can read or write.
 var EXITING_MESSAGE =
   // Exported so that ./client.js can know what to expect.
   exports.EXITING_MESSAGE = "Shell exiting...";
 
-var Promise = require("meteor-promise");
-// Only require("fibers") if somehow Promise.Fiber is not yet defined.
-Promise.Fiber = Promise.Fiber || require("fibers");
+var Promise = require("promise/lib/es6-extensions");
+require("meteor-promise").makeCompatible(Promise, require("fibers"));
 
 // Invoked by the server process to listen for incoming connections from
 // shell clients. Each connection gets its own REPL instance.
@@ -32,7 +31,7 @@ exports.listen = function listen(shellDir) {
       hooks.push(callback);
     } else {
       // As a fallback, just call the callback asynchronously.
-      process.nextTick(callback);
+      setImmediate(callback);
     }
   }
 };
@@ -87,9 +86,58 @@ Sp.listen = function listen() {
   });
 };
 
+function readJSONFromStream(inputStream, callback) {
+  var outputStream = new stream.PassThrough;
+  var dataSoFar = "";
+
+  function onData(buffer) {
+    var lines = buffer.toString("utf8").split("\n");
+
+    while (lines.length > 0) {
+      dataSoFar += lines.shift();
+
+      try {
+        var json = JSON.parse(dataSoFar);
+      } catch (error) {
+        if (error instanceof SyntaxError) {
+          continue;
+        }
+
+        return finish(error);
+      }
+
+      if (lines.length > 0) {
+        outputStream.write(lines.join("\n"));
+      }
+
+      inputStream.pipe(outputStream);
+
+      return finish(null, json);
+    }
+  }
+
+  function onClose() {
+    finish(new Error("stream unexpectedly closed"));
+  }
+
+  var finished = false;
+  function finish(error, json) {
+    if (! finished) {
+      finished = true;
+      inputStream.removeListener("data", onData);
+      inputStream.removeListener("error", finish);
+      inputStream.removeListener("close", onClose);
+      callback(error, json, outputStream);
+    }
+  }
+
+  inputStream.on("data", onData);
+  inputStream.on("error", finish);
+  inputStream.on("close", onClose);
+}
+
 Sp.onConnection = function onConnection(socket) {
   var self = this;
-  var dataSoFar = "";
 
   // Make sure this function doesn't try to write anything to the socket
   // after it has been closed.
@@ -110,21 +158,8 @@ Sp.onConnection = function onConnection(socket) {
   // JSON object over the socket. For example, only the client knows
   // whether it's running a TTY or an Emacs subshell or some other kind of
   // terminal, so the client must decide the value of options.terminal.
-  socket.on("data", function onData(buffer) {
-    // Just in case the options JSON comes in fragments.
-    dataSoFar += buffer.toString("utf8");
-
-    try {
-      var options = JSON.parse(dataSoFar);
-    } finally {
-      if (! _.isObject(options)) {
-        return; // Silence any parsing exceptions.
-      }
-    }
-
-    if (socket) {
-      socket.removeListener("data", onData);
-    }
+  readJSONFromStream(socket, function (error, options, replInputSocket) {
+    clearTimeout(timeout);
 
     if (options.key !== self.key) {
       if (socket) {
@@ -134,11 +169,33 @@ Sp.onConnection = function onConnection(socket) {
     }
     delete options.key;
 
-    clearTimeout(timeout);
+    if (options.evaluateAndExit) {
+      evalCommand(
+        "(" + options.evaluateAndExit.command + ")",
+        null, // evalCommand ignores the context parameter, anyway
+        options.evaluateAndExit.filename || "<meteor shell>",
+        function (error, result) {
+          if (socket) {
+            var message = error ? {
+              error: error + "",
+              code: 1
+            } : {
+              result: result
+            };
+
+            // Sending back a JSON payload allows the client to
+            // distinguish between errors and successful results.
+            socket.end(JSON.stringify(message) + "\n");
+          }
+        }
+      );
+      return;
+    }
+    delete options.evaluateAndExit;
 
     // Immutable options.
     _.extend(options, {
-      input: socket,
+      input: replInputSocket,
       output: socket,
       eval: evalCommand
     });
@@ -198,17 +255,35 @@ Sp.startREPL = function startREPL(options) {
     configurable: true
   });
 
-  // Use the same `require` function and `module` object visible to the
-  // shell.js module.
-  repl.context.require = require;
-  repl.context.module = module;
+  if (Package.modules) {
+    // Use the same `require` function and `module` object visible to the
+    // application.
+    var toBeInstalled = {};
+    var shellModuleName = "meteor-shell-" +
+      Math.random().toString(36).slice(2) + ".js";
+
+    toBeInstalled[shellModuleName] = function (require, exports, module) {
+      repl.context.module = module;
+      repl.context.require = require;
+    };
+
+    // This populates repl.context.{module,require} by evaluating the
+    // module defined above.
+    Package.modules.meteorInstall(toBeInstalled)("./" + shellModuleName);
+  }
+
   repl.context.repl = repl;
 
   // Some improvements to the existing help messages.
-  repl.commands[".break"].help =
-    "Terminate current command input and display new prompt";
-  repl.commands[".exit"].help = "Disconnect from server and leave shell";
-  repl.commands[".help"].help = "Show this help information";
+  function addHelp(cmd, helpText) {
+    var info = repl.commands[cmd] || repl.commands["." + cmd];
+    if (info) {
+      info.help = helpText;
+    }
+  }
+  addHelp("break", "Terminate current command input and display new prompt");
+  addHelp("exit", "Disconnect from server and leave shell");
+  addHelp("help", "Show this help information");
 
   // When the REPL exits, signal the attached client to exit by sending it
   // the special EXITING_MESSAGE.

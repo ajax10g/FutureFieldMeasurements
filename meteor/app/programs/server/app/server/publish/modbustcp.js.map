@@ -1,1 +1,0 @@
-{"version":3,"sources":["meteor://💻app/server/publish/modbustcp.js"],"names":[],"mappings":";;;;;;;;AAAA,MAAM,CAAC,OAAO,CAAC,WAAW,EAAE,YAAY;AACpC,WAAO,SAAS,CAAC,IAAI,EAAE,CAAC;CAC3B,CAAC,CAAC,sE","file":"/server/publish/modbustcp.js","sourcesContent":["Meteor.publish(\"modbustcp\", function () {\n    return ModbusTcp.find();\n});"]}

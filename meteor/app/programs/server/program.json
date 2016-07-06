@@ -3,46 +3,52 @@
   "arch": "os.linux.x86_64",
   "load": [
     {
-      "node_modules": "npm/es5-shim/node_modules",
-      "sourceMap": "packages/es5-shim.js.map",
-      "path": "packages/es5-shim.js"
-    },
-    {
       "sourceMap": "packages/underscore.js.map",
       "path": "packages/underscore.js"
     },
     {
-      "node_modules": "npm/meteor/node_modules",
+      "node_modules": "npm/node_modules/meteor/meteor/node_modules",
       "sourceMap": "packages/meteor.js.map",
       "path": "packages/meteor.js"
     },
     {
-      "sourceMap": "packages/meteor-base.js.map",
       "path": "packages/meteor-base.js"
     },
     {
-      "sourceMap": "packages/mobile-experience.js.map",
       "path": "packages/mobile-experience.js"
     },
     {
-      "node_modules": "npm/npm-mongo/node_modules",
+      "node_modules": "npm/node_modules/meteor/npm-mongo/node_modules",
       "sourceMap": "packages/npm-mongo.js.map",
       "path": "packages/npm-mongo.js"
     },
     {
-      "sourceMap": "packages/base64.js.map",
-      "path": "packages/base64.js"
+      "node_modules": "npm/node_modules/meteor/modules-runtime/node_modules",
+      "sourceMap": "packages/modules-runtime.js.map",
+      "path": "packages/modules-runtime.js"
     },
     {
-      "sourceMap": "packages/ejson.js.map",
-      "path": "packages/ejson.js"
+      "node_modules": "npm/node_modules/meteor/modules/node_modules",
+      "sourceMap": "packages/modules.js.map",
+      "path": "packages/modules.js"
     },
     {
-      "sourceMap": "packages/check.js.map",
-      "path": "packages/check.js"
+      "node_modules": "npm/node_modules/meteor/es5-shim/node_modules",
+      "sourceMap": "packages/es5-shim.js.map",
+      "path": "packages/es5-shim.js"
     },
     {
-      "node_modules": "npm/babel-compiler/node_modules",
+      "node_modules": "npm/node_modules/meteor/promise/node_modules",
+      "sourceMap": "packages/promise.js.map",
+      "path": "packages/promise.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ecmascript-runtime/node_modules",
+      "sourceMap": "packages/ecmascript-runtime.js.map",
+      "path": "packages/ecmascript-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-compiler/node_modules",
       "sourceMap": "packages/babel-compiler.js.map",
       "path": "packages/babel-compiler.js"
     },
@@ -51,22 +57,12 @@
       "path": "packages/ecmascript.js"
     },
     {
-      "sourceMap": "packages/babel-runtime.js.map",
-      "path": "packages/babel-runtime.js"
+      "sourceMap": "packages/base64.js.map",
+      "path": "packages/base64.js"
     },
     {
-      "node_modules": "npm/ecmascript-runtime/node_modules",
-      "sourceMap": "packages/ecmascript-runtime.js.map",
-      "path": "packages/ecmascript-runtime.js"
-    },
-    {
-      "node_modules": "npm/promise/node_modules",
-      "sourceMap": "packages/promise.js.map",
-      "path": "packages/promise.js"
-    },
-    {
-      "sourceMap": "packages/random.js.map",
-      "path": "packages/random.js"
+      "sourceMap": "packages/ejson.js.map",
+      "path": "packages/ejson.js"
     },
     {
       "sourceMap": "packages/id-map.js.map",
@@ -79,6 +75,15 @@
     {
       "sourceMap": "packages/tracker.js.map",
       "path": "packages/tracker.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-runtime/node_modules",
+      "sourceMap": "packages/babel-runtime.js.map",
+      "path": "packages/babel-runtime.js"
+    },
+    {
+      "sourceMap": "packages/random.js.map",
+      "path": "packages/random.js"
     },
     {
       "sourceMap": "packages/mongo-id.js.map",
@@ -97,6 +102,10 @@
       "path": "packages/minimongo.js"
     },
     {
+      "sourceMap": "packages/check.js.map",
+      "path": "packages/check.js"
+    },
+    {
       "sourceMap": "packages/retry.js.map",
       "path": "packages/retry.js"
     },
@@ -105,7 +114,7 @@
       "path": "packages/ddp-common.js"
     },
     {
-      "node_modules": "npm/ddp-client/node_modules",
+      "node_modules": "npm/node_modules/meteor/ddp-client/node_modules",
       "sourceMap": "packages/ddp-client.js.map",
       "path": "packages/ddp-client.js"
     },
@@ -118,7 +127,7 @@
       "path": "packages/ddp-rate-limiter.js"
     },
     {
-      "node_modules": "npm/logging/node_modules",
+      "node_modules": "npm/node_modules/meteor/logging/node_modules",
       "sourceMap": "packages/logging.js.map",
       "path": "packages/logging.js"
     },
@@ -127,7 +136,6 @@
       "path": "packages/routepolicy.js"
     },
     {
-      "sourceMap": "packages/deps.js.map",
       "path": "packages/deps.js"
     },
     {
@@ -147,7 +155,6 @@
       "path": "packages/spacebars-compiler.js"
     },
     {
-      "sourceMap": "packages/jquery.js.map",
       "path": "packages/jquery.js"
     },
     {
@@ -167,7 +174,6 @@
       "path": "packages/spacebars.js"
     },
     {
-      "sourceMap": "packages/ui.js.map",
       "path": "packages/ui.js"
     },
     {
@@ -183,12 +189,11 @@
       "path": "packages/webapp-hashing.js"
     },
     {
-      "node_modules": "npm/webapp/node_modules",
+      "node_modules": "npm/node_modules/meteor/webapp/node_modules",
       "sourceMap": "packages/webapp.js.map",
       "path": "packages/webapp.js"
     },
     {
-      "sourceMap": "packages/autopublish.js.map",
       "path": "packages/autopublish.js"
     },
     {
@@ -196,41 +201,36 @@
       "path": "packages/callback-hook.js"
     },
     {
-      "node_modules": "npm/ddp-server/node_modules",
+      "node_modules": "npm/node_modules/meteor/ddp-server/node_modules",
       "sourceMap": "packages/ddp-server.js.map",
       "path": "packages/ddp-server.js"
     },
     {
-      "sourceMap": "packages/ddp.js.map",
       "path": "packages/ddp.js"
+    },
+    {
+      "sourceMap": "packages/allow-deny.js.map",
+      "path": "packages/allow-deny.js"
     },
     {
       "sourceMap": "packages/binary-heap.js.map",
       "path": "packages/binary-heap.js"
     },
     {
-      "sourceMap": "packages/insecure.js.map",
       "path": "packages/insecure.js"
     },
     {
-      "node_modules": "npm/mongo/node_modules",
+      "node_modules": "npm/node_modules/meteor/mongo/node_modules",
       "sourceMap": "packages/mongo.js.map",
       "path": "packages/mongo.js"
     },
     {
-      "sourceMap": "packages/blaze-html-templates.js.map",
       "path": "packages/blaze-html-templates.js"
     },
     {
-      "sourceMap": "packages/session.js.map",
       "path": "packages/session.js"
     },
     {
-      "sourceMap": "packages/standard-minifiers.js.map",
-      "path": "packages/standard-minifiers.js"
-    },
-    {
-      "sourceMap": "packages/standard-app-packages.js.map",
       "path": "packages/standard-app-packages.js"
     },
     {
@@ -242,12 +242,12 @@
       "path": "packages/url.js"
     },
     {
-      "node_modules": "npm/http/node_modules",
+      "node_modules": "npm/node_modules/meteor/http/node_modules",
       "sourceMap": "packages/http.js.map",
       "path": "packages/http.js"
     },
     {
-      "node_modules": "npm/email/node_modules",
+      "node_modules": "npm/node_modules/meteor/email/node_modules",
       "sourceMap": "packages/email.js.map",
       "path": "packages/email.js"
     },
@@ -259,7 +259,6 @@
       }
     },
     {
-      "sourceMap": "packages/templating.js.map",
       "path": "packages/templating.js"
     },
     {
@@ -283,7 +282,6 @@
       "path": "packages/iron_middleware-stack.js"
     },
     {
-      "sourceMap": "packages/iron_location.js.map",
       "path": "packages/iron_location.js"
     },
     {
@@ -295,12 +293,11 @@
       "path": "packages/iron_controller.js"
     },
     {
-      "node_modules": "npm/iron_router/node_modules",
+      "node_modules": "npm/node_modules/meteor/iron_router/node_modules",
       "sourceMap": "packages/iron_router.js.map",
       "path": "packages/iron_router.js"
     },
     {
-      "sourceMap": "packages/natestrauser_font-awesome.js.map",
       "path": "packages/natestrauser_font-awesome.js"
     },
     {
@@ -312,19 +309,16 @@
       "path": "packages/perak_user-roles.js"
     },
     {
-      "sourceMap": "packages/copleykj_livestamp.js.map",
       "path": "packages/copleykj_livestamp.js"
     },
     {
-      "sourceMap": "packages/less.js.map",
       "path": "packages/less.js"
     },
     {
-      "sourceMap": "packages/nemo64_bootstrap.js.map",
       "path": "packages/nemo64_bootstrap.js"
     },
     {
-      "node_modules": "npm/npm-bcrypt/node_modules",
+      "node_modules": "npm/node_modules/meteor/npm-bcrypt/node_modules",
       "sourceMap": "packages/npm-bcrypt.js.map",
       "path": "packages/npm-bcrypt.js"
     },
@@ -341,7 +335,6 @@
       "path": "packages/accounts-password.js"
     },
     {
-      "sourceMap": "packages/mizzao_bootboxjs.js.map",
       "path": "packages/mizzao_bootboxjs.js"
     },
     {
@@ -349,11 +342,10 @@
       "path": "packages/mrt_moment.js"
     },
     {
-      "sourceMap": "packages/rajit_bootstrap3-datepicker.js.map",
       "path": "packages/rajit_bootstrap3-datepicker.js"
     },
     {
-      "node_modules": "npm/perak_mqtt-collection/node_modules",
+      "node_modules": "npm/node_modules/meteor/perak_mqtt-collection/node_modules",
       "sourceMap": "packages/perak_mqtt-collection.js.map",
       "path": "packages/perak_mqtt-collection.js"
     },
@@ -374,28 +366,29 @@
       "path": "packages/meteorhacks_meteorx.js"
     },
     {
-      "sourceMap": "packages/livedata.js.map",
       "path": "packages/livedata.js"
     },
     {
-      "sourceMap": "packages/mongo-livedata.js.map",
       "path": "packages/mongo-livedata.js"
     },
     {
-      "node_modules": "npm/meteorhacks_kadira/node_modules",
+      "node_modules": "npm/node_modules/meteor/meteorhacks_kadira/node_modules",
       "sourceMap": "packages/meteorhacks_kadira.js.map",
       "path": "packages/meteorhacks_kadira.js"
     },
     {
-      "sourceMap": "packages/hot-code-push.js.map",
+      "path": "packages/standard-minifier-css.js"
+    },
+    {
+      "path": "packages/standard-minifier-js.js"
+    },
+    {
       "path": "packages/hot-code-push.js"
     },
     {
-      "sourceMap": "packages/launch-screen.js.map",
       "path": "packages/launch-screen.js"
     },
     {
-      "sourceMap": "packages/reload.js.map",
       "path": "packages/reload.js"
     },
     {
@@ -403,167 +396,14 @@
       "path": "packages/autoupdate.js"
     },
     {
-      "sourceMap": "packages/meteor-platform.js.map",
       "path": "packages/meteor-platform.js"
     },
     {
       "path": "packages/global-imports.js"
     },
     {
-      "sourceMap": "app/lib/number_utils.js.map",
-      "path": "app/lib/number_utils.js"
-    },
-    {
-      "sourceMap": "app/lib/object_utils.js.map",
-      "path": "app/lib/object_utils.js"
-    },
-    {
-      "sourceMap": "app/lib/string_utils.js.map",
-      "path": "app/lib/string_utils.js"
-    },
-    {
-      "sourceMap": "app/both/collections/ethercat.js.map",
-      "path": "app/both/collections/ethercat.js"
-    },
-    {
-      "sourceMap": "app/both/collections/ethercatunits.js.map",
-      "path": "app/both/collections/ethercatunits.js"
-    },
-    {
-      "sourceMap": "app/both/collections/gpio.js.map",
-      "path": "app/both/collections/gpio.js"
-    },
-    {
-      "sourceMap": "app/both/collections/mbus.js.map",
-      "path": "app/both/collections/mbus.js"
-    },
-    {
-      "sourceMap": "app/both/collections/modbusrtu.js.map",
-      "path": "app/both/collections/modbusrtu.js"
-    },
-    {
-      "sourceMap": "app/both/collections/modbusrturead.js.map",
-      "path": "app/both/collections/modbusrturead.js"
-    },
-    {
-      "sourceMap": "app/both/collections/modbustcp.js.map",
-      "path": "app/both/collections/modbustcp.js"
-    },
-    {
-      "sourceMap": "app/both/collections/modbustcpread.js.map",
-      "path": "app/both/collections/modbustcpread.js"
-    },
-    {
-      "sourceMap": "app/both/collections/modbustcpreadcommand.js.map",
-      "path": "app/both/collections/modbustcpreadcommand.js"
-    },
-    {
-      "sourceMap": "app/both/collections/onewire.js.map",
-      "path": "app/both/collections/onewire.js"
-    },
-    {
-      "sourceMap": "app/both/collections/signals.js.map",
-      "path": "app/both/collections/signals.js"
-    },
-    {
-      "sourceMap": "app/both/joins/joins.js.map",
-      "path": "app/both/joins/joins.js"
-    },
-    {
-      "sourceMap": "app/server/collections/ethercat.js.map",
-      "path": "app/server/collections/ethercat.js"
-    },
-    {
-      "sourceMap": "app/server/collections/ethercatunits.js.map",
-      "path": "app/server/collections/ethercatunits.js"
-    },
-    {
-      "sourceMap": "app/server/collections/gpio.js.map",
-      "path": "app/server/collections/gpio.js"
-    },
-    {
-      "sourceMap": "app/server/collections/mbus.js.map",
-      "path": "app/server/collections/mbus.js"
-    },
-    {
-      "sourceMap": "app/server/collections/modbusrtu.js.map",
-      "path": "app/server/collections/modbusrtu.js"
-    },
-    {
-      "sourceMap": "app/server/collections/modbusrturead.js.map",
-      "path": "app/server/collections/modbusrturead.js"
-    },
-    {
-      "sourceMap": "app/server/collections/modbustcp.js.map",
-      "path": "app/server/collections/modbustcp.js"
-    },
-    {
-      "sourceMap": "app/server/collections/modbustcpread.js.map",
-      "path": "app/server/collections/modbustcpread.js"
-    },
-    {
-      "sourceMap": "app/server/collections/modbustcpreadcommand.js.map",
-      "path": "app/server/collections/modbustcpreadcommand.js"
-    },
-    {
-      "sourceMap": "app/server/collections/onewire.js.map",
-      "path": "app/server/collections/onewire.js"
-    },
-    {
-      "sourceMap": "app/server/collections/signals.js.map",
-      "path": "app/server/collections/signals.js"
-    },
-    {
-      "sourceMap": "app/server/controllers/router.js.map",
-      "path": "app/server/controllers/router.js"
-    },
-    {
-      "sourceMap": "app/server/publish/ethercat.js.map",
-      "path": "app/server/publish/ethercat.js"
-    },
-    {
-      "sourceMap": "app/server/publish/ethercatunits.js.map",
-      "path": "app/server/publish/ethercatunits.js"
-    },
-    {
-      "sourceMap": "app/server/publish/gpio.js.map",
-      "path": "app/server/publish/gpio.js"
-    },
-    {
-      "sourceMap": "app/server/publish/mbus.js.map",
-      "path": "app/server/publish/mbus.js"
-    },
-    {
-      "sourceMap": "app/server/publish/modbusrtu.js.map",
-      "path": "app/server/publish/modbusrtu.js"
-    },
-    {
-      "sourceMap": "app/server/publish/modbusrturead.js.map",
-      "path": "app/server/publish/modbusrturead.js"
-    },
-    {
-      "sourceMap": "app/server/publish/modbustcp.js.map",
-      "path": "app/server/publish/modbustcp.js"
-    },
-    {
-      "sourceMap": "app/server/publish/modbustcpread.js.map",
-      "path": "app/server/publish/modbustcpread.js"
-    },
-    {
-      "sourceMap": "app/server/publish/modbustcpreadcommand.js.map",
-      "path": "app/server/publish/modbustcpreadcommand.js"
-    },
-    {
-      "sourceMap": "app/server/publish/onewire.js.map",
-      "path": "app/server/publish/onewire.js"
-    },
-    {
-      "sourceMap": "app/server/publish/signals.js.map",
-      "path": "app/server/publish/signals.js"
-    },
-    {
-      "sourceMap": "app/server/server.js.map",
-      "path": "app/server/server.js"
+      "sourceMap": "app/app.js.map",
+      "path": "app/app.js"
     },
     {
       "sourceMap": "packages/service-configuration.js.map",

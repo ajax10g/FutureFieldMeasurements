@@ -2,6 +2,8 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
 /* Package-scope variables */
 var livestamp;
@@ -14,7 +16,6 @@ var livestamp;
 //                                                                   //
 ///////////////////////////////////////////////////////////////////////
                                                                      //
-                                                                     // 1
 ///////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -22,10 +23,11 @@ var livestamp;
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['copleykj:livestamp'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['copleykj:livestamp'] = {}, {
   livestamp: livestamp
-};
+});
 
 })();
-
-//# sourceMappingURL=copleykj_livestamp.js.map

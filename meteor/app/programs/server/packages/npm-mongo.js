@@ -2,44 +2,37 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 
 /* Package-scope variables */
 var NpmModuleMongodb, NpmModuleMongodbVersion;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////
-//                                                                          //
-// packages/npm-mongo/packages/npm-mongo.js                                 //
-//                                                                          //
-//////////////////////////////////////////////////////////////////////////////
-                                                                            //
-(function(){                                                                // 1
-                                                                            // 2
-/////////////////////////////////////////////////////////////////////////   // 3
-//                                                                     //   // 4
-// packages/npm-mongo/wrapper.js                                       //   // 5
-//                                                                     //   // 6
-/////////////////////////////////////////////////////////////////////////   // 7
-                                                                       //   // 8
-NpmModuleMongodb = Npm.require('mongodb');                             // 1
-NpmModuleMongodbVersion = Npm.require('mongodb/package.json').version;      // 10
-                                                                       // 3
-/////////////////////////////////////////////////////////////////////////   // 12
-                                                                            // 13
-}).call(this);                                                              // 14
-                                                                            // 15
-//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+//                                                                     //
+// packages/npm-mongo/wrapper.js                                       //
+//                                                                     //
+/////////////////////////////////////////////////////////////////////////
+                                                                       //
+NpmModuleMongodb = Npm.require('mongodb');
+NpmModuleMongodbVersion = Npm.require('mongodb/package.json').version;
+
+/////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['npm-mongo'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['npm-mongo'] = {}, {
   NpmModuleMongodb: NpmModuleMongodb,
   NpmModuleMongodbVersion: NpmModuleMongodbVersion
-};
+});
 
 })();
 
